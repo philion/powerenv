@@ -1,5 +1,11 @@
-powerenv -- unclutter your .profile
-=================================
+# `powerenv`
+
+An ENV manager with powerline built in!
+
+The only thing extra it does is that when it finds a powerline configuration, it builds PS1 (and all the related prompt env vars) in the new ENV that `powerenv` is managing. This is done mostly from reading env vars once the `direnv` function is complete.
+
+----
+# orig direnv docs
 
 [![Built with Nix](https://builtwithnix.org/badge.svg)](https://builtwithnix.org)
 [![Packaging status](https://repology.org/badge/tiny-repos/powerenv.svg)](https://repology.org/project/powerenv/versions)

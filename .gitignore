@@ -7,3 +7,4 @@
 /test/config
 /test/data
 /test/scenarios/inherited/.envrc
+.DS_Store

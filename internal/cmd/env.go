@@ -16,6 +16,7 @@ type Env map[string]string
 //
 // NOTE:  We don't support having two variables with the same name.
 // I've never seen it used in the wild but according to POSIX it's allowed.
+// TODO: Log warning if split > 2.
 func GetEnv() Env {
 	env := make(Env)
 

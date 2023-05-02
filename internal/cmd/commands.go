@@ -66,6 +66,7 @@ func init() {
 		CmdWatchDir,
 		CmdWatchList,
 		CmdCurrent,
+		CmdPrompt,
 	}
 }
 

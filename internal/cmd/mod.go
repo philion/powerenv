@@ -16,7 +16,9 @@ func Main(env Env, args []string, modBashPath string, modStdlib string, modVersi
 	// break relative path access when finding .envrc or .env in a parent.
 	_ = os.Unsetenv("PWD")
 
+	// always, or just with a flag?
 	setupLogging(env)
+
 	bashPath = modBashPath
 	stdlib = modStdlib
 	version = modVersion

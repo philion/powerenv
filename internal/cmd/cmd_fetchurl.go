@@ -8,14 +8,14 @@ import (
 	"path/filepath"
 	"strings"
 
-	"github.com/direnv/direnv/v2/pkg/sri"
+	"github.com/powerenv/powerenv/v2/pkg/sri"
 	"github.com/mattn/go-isatty"
 )
 
-// CmdFetchURL is `direnv fetchurl <url> [<integrity-hash>]`
+// CmdFetchURL is `powerenv fetchurl <url> [<integrity-hash>]`
 var CmdFetchURL = &Cmd{
 	Name:   "fetchurl",
-	Desc:   "Fetches a given URL into direnv's CAS",
+	Desc:   "Fetches a given URL into powerenv's CAS",
 	Args:   []string{"<url>", "[<integrity-hash>]"},
 	Action: actionWithConfig(cmdFetchURL),
 }
@@ -117,7 +117,7 @@ func cmdFetchURL(_ Env, args []string, config *Config) (err error) {
 
 Invoke fetchurl again with the hash as an argument to get the disk location:
 
-  direnv fetchurl "%s" "%s"
+  powerenv fetchurl "%s" "%s"
   #=> %s
 `, calculatedHash, url, calculatedHash.String(), casFile)
 		} else {

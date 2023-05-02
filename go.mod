@@ -1,4 +1,4 @@
-module github.com/direnv/direnv/v2
+module github.com/powerenv/powerenv/v2
 
 go 1.16
 

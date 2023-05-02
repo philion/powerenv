@@ -1,8 +1,8 @@
 *.sw?
-.direnv
+.powerenv
 .gopath
-/direnv
-/direnv.test
+/powerenv
+/powerenv.test
 /dist
 /test/config
 /test/data

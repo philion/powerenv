@@ -122,27 +122,27 @@ func (rc *RC) Path() string {
 }
 
 // Touch updates the mtime of the RC file. This is mainly used to trigger a
-// reload in direnv.
+// reload in powerenv.
 func (rc *RC) Touch() error {
 	return touch(rc.path)
 }
 
-const notAllowed = "%s is blocked. Run `direnv allow` to approve its content"
+const notAllowed = "%s is blocked. Run `powerenv allow` to approve its content"
 
 // Load evaluates the RC file and returns the new Env or error.
 //
-// This functions is key to the implementation of direnv.
+// This functions is key to the implementation of powerenv.
 func (rc *RC) Load(previousEnv Env) (newEnv Env, err error) {
 	config := rc.config
 	wd := config.WorkDir
-	direnv := config.SelfPath
+	powerenv := config.SelfPath
 	newEnv = previousEnv.Copy()
-	newEnv[DIRENV_WATCHES] = rc.times.Marshal()
+	newEnv[powerenv_WATCHES] = rc.times.Marshal()
 	defer func() {
 		// Record directory changes even if load is disallowed or fails
-		newEnv[DIRENV_DIR] = "-" + filepath.Dir(rc.path)
-		newEnv[DIRENV_FILE] = rc.path
-		newEnv[DIRENV_DIFF] = previousEnv.Diff(newEnv).Serialize()
+		newEnv[powerenv_DIR] = "-" + filepath.Dir(rc.path)
+		newEnv[powerenv_FILE] = rc.path
+		newEnv[powerenv_DIFF] = previousEnv.Diff(newEnv).Serialize()
 	}()
 
 	// Abort if the file is not allowed
@@ -186,7 +186,7 @@ func (rc *RC) Load(previousEnv Env) (newEnv Env, err error) {
 	arg := fmt.Sprintf(
 		`%seval "$("%s" stdlib)" && __main__ %s %s`,
 		prelude,
-		direnv,
+		powerenv,
 		fn,
 		BashEscape(rc.Path()),
 	)

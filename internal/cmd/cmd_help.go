@@ -5,7 +5,7 @@ import (
 	"strings"
 )
 
-// CmdHelp is `direnv help`
+// CmdHelp is `powerenv help`
 var CmdHelp = &Cmd{
 	Name:    "help",
 	Desc:    "shows this help",
@@ -13,8 +13,8 @@ var CmdHelp = &Cmd{
 	Aliases: []string{"--help"},
 	Action: actionSimple(func(env Env, args []string) (err error) {
 		var showPrivate = len(args) > 1
-		fmt.Printf(`direnv v%s
-Usage: direnv COMMAND [...ARGS]
+		fmt.Printf(`powerenv v%s
+Usage: powerenv COMMAND [...ARGS]
 
 Available commands
 ------------------

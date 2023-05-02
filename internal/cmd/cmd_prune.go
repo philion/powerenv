@@ -6,7 +6,7 @@ import (
 	"strings"
 )
 
-// CmdPrune is `direnv prune`
+// CmdPrune is `powerenv prune`
 var CmdPrune = &Cmd{
 	Name:   "prune",
 	Desc:   "removes old allowed files",

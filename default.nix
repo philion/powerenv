@@ -8,7 +8,7 @@ let
     ;
 in
 buildGoModule rec {
-  name = "direnv-${version}";
+  name = "powerenv-${version}";
   version = lib.fileContents ./version.txt;
   subPackages = [ "." ];
 
@@ -32,7 +32,7 @@ buildGoModule rec {
 
   meta = {
     description = "A shell extension that manages your environment";
-    homepage = https://direnv.net;
+    homepage = https://powerenv.net;
     license = lib.licenses.mit;
     maintainers = [ lib.maintainers.zimbatm ];
   };

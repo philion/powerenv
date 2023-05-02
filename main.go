@@ -2,7 +2,7 @@ package main
 
 import (
 	_ "embed"
-	"github.com/direnv/direnv/v2/internal/cmd"
+	"github.com/powerenv/powerenv/v2/internal/cmd"
 	"os"
 	"strings"
 )

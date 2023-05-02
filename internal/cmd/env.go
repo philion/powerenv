@@ -5,7 +5,7 @@ import (
 	"os"
 	"strings"
 
-	"github.com/direnv/direnv/v2/gzenv"
+	"github.com/powerenv/powerenv/v2/gzenv"
 )
 
 // Env is a map representation of environment variables.
@@ -31,15 +31,15 @@ func GetEnv() Env {
 	return env
 }
 
-// CleanContext removes all the direnv-related environment variables. Call
-// this after reverting the environment, otherwise direnv will just be amnesic
+// CleanContext removes all the powerenv-related environment variables. Call
+// this after reverting the environment, otherwise powerenv will just be amnesic
 // about the previously-loaded environment.
 func (env Env) CleanContext() {
-	delete(env, DIRENV_DIFF)
-	delete(env, DIRENV_DIR)
-	delete(env, DIRENV_FILE)
-	delete(env, DIRENV_DUMP_FILE_PATH)
-	delete(env, DIRENV_WATCHES)
+	delete(env, powerenv_DIFF)
+	delete(env, powerenv_DIR)
+	delete(env, powerenv_FILE)
+	delete(env, powerenv_DUMP_FILE_PATH)
+	delete(env, powerenv_WATCHES)
 }
 
 // LoadEnv unmarshals the env back from a gzenv string

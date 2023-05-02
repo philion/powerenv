@@ -13,18 +13,18 @@ shopt -s nullglob
 shopt -s extglob
 
 # NOTE: don't touch the RHS, it gets replaced at runtime
-direnv="$(command -v direnv)"
+powerenv="$(command -v powerenv)"
 
-# Config, change in the direnvrc
-DIRENV_LOG_FORMAT="${DIRENV_LOG_FORMAT-direnv: %s}"
+# Config, change in the powerenvrc
+powerenv_LOG_FORMAT="${powerenv_LOG_FORMAT-powerenv: %s}"
 
-# Where direnv configuration should be stored
-direnv_config_dir="${DIRENV_CONFIG:-${XDG_CONFIG_HOME:-$HOME/.config}/direnv}"
+# Where powerenv configuration should be stored
+powerenv_config_dir="${powerenv_CONFIG:-${XDG_CONFIG_HOME:-$HOME/.config}/powerenv}"
 
 # This variable can be used by programs to detect when they are running inside
-# of a .envrc evaluation context. It is ignored by the direnv diffing
+# of a .envrc evaluation context. It is ignored by the powerenv diffing
 # algorithm and so it won't be re-exported.
-export DIRENV_IN_ENVRC=1
+export powerenv_IN_ENVRC=1
 
 __env_strictness() {
   local mode tmpfile old_shell_options
@@ -110,22 +110,22 @@ unstrict_env() {
   fi
 }
 
-# Usage: direnv_layout_dir
+# Usage: powerenv_layout_dir
 #
-# Prints the folder path that direnv should use to store layout content.
+# Prints the folder path that powerenv should use to store layout content.
 # This needs to be a function as $PWD might change during source_env/up.
 #
-# The output defaults to $PWD/.direnv.
+# The output defaults to $PWD/.powerenv.
 
-direnv_layout_dir() {
-  echo "${direnv_layout_dir:-$PWD/.direnv}"
+powerenv_layout_dir() {
+  echo "${powerenv_layout_dir:-$PWD/.powerenv}"
 }
 
 # Usage: log_status [<message> ...]
 #
 # Logs a status message. Acts like echo,
-# but wraps output in the standard direnv log format
-# (controlled by $DIRENV_LOG_FORMAT), and directs it
+# but wraps output in the standard powerenv log format
+# (controlled by $powerenv_LOG_FORMAT), and directs it
 # to stderr rather than stdout.
 #
 # Example:
@@ -133,21 +133,21 @@ direnv_layout_dir() {
 #    log_status "Loading ..."
 #
 log_status() {
-  if [[ -n $DIRENV_LOG_FORMAT ]]; then
+  if [[ -n $powerenv_LOG_FORMAT ]]; then
     local msg=$* color_normal=''
     if [[ -t 2 ]]; then
       color_normal="\e[m"
     fi
     # shellcheck disable=SC2059,SC1117
-    printf "${color_normal}${DIRENV_LOG_FORMAT}\n" "$msg" >&2
+    printf "${color_normal}${powerenv_LOG_FORMAT}\n" "$msg" >&2
   fi
 }
 
 # Usage: log_error [<message> ...]
 #
 # Logs an error message. Acts like echo,
-# but wraps output in the standard direnv log format
-# (controlled by $DIRENV_LOG_FORMAT), and directs it
+# but wraps output in the standard powerenv log format
+# (controlled by $powerenv_LOG_FORMAT), and directs it
 # to stderr rather than stdout.
 #
 # Example:
@@ -155,14 +155,14 @@ log_status() {
 #    log_error "Unable to find specified directory!"
 
 log_error() {
-  if [[ -n $DIRENV_LOG_FORMAT ]]; then
+  if [[ -n $powerenv_LOG_FORMAT ]]; then
     local msg=$* color_normal='' color_error=''
     if [[ -t 2 ]]; then
       color_normal="\e[m"
       color_error="\e[38;5;1m"
     fi
     # shellcheck disable=SC2059,SC1117
-    printf "${color_error}${DIRENV_LOG_FORMAT}${color_normal}\n" "$msg" >&2
+    printf "${color_error}${powerenv_LOG_FORMAT}${color_normal}\n" "$msg" >&2
   fi
 }
 
@@ -238,7 +238,7 @@ dotenv() {
     log_error ".env at $path not found"
     return 1
   fi
-  eval "$("$direnv" dotenv bash "$@")"
+  eval "$("$powerenv" dotenv bash "$@")"
 }
 
 # Usage: dotenv_if_exists [<filename>]
@@ -256,7 +256,7 @@ dotenv_if_exists() {
   if ! [[ -f $path ]]; then
     return
   fi
-  eval "$("$direnv" dotenv bash "$@")"
+  eval "$("$powerenv" dotenv bash "$@")"
 }
 
 # Usage: user_rel_path <abs_path>
@@ -404,19 +404,19 @@ env_vars_required() {
 
 # Usage: watch_file <filename> [<filename> ...]
 #
-# Adds each <filename> to the list of files that direnv will watch for changes -
+# Adds each <filename> to the list of files that powerenv will watch for changes -
 # useful when the contents of a file influence how variables are set -
-# especially in direnvrc
+# especially in powerenvrc
 #
 watch_file() {
-  eval "$("$direnv" watch bash "$@")"
+  eval "$("$powerenv" watch bash "$@")"
 }
 
 # Usage: watch_dir <dir>
 #
-# Adds <dir> to the list of dirs that direnv will recursively watch for changes
+# Adds <dir> to the list of dirs that powerenv will recursively watch for changes
 watch_dir() {
-  eval "$("$direnv" watch-dir bash "$1")"
+  eval "$("$powerenv" watch-dir bash "$1")"
 }
 
 # Usage: _source_up [<filename>] [true|false]
@@ -463,7 +463,7 @@ source_up_if_exists() {
 # Fetches a URL and outputs a file with its content. If the <integrity-hash>
 # is given it will also validate the content of the file before returning it.
 fetchurl() {
-  "$direnv" fetchurl "$@"
+  "$powerenv" fetchurl "$@"
 }
 
 # Usage: source_url <url> <integrity-hash>
@@ -476,7 +476,7 @@ source_url() {
     return 1
   fi
   if [[ -z $integrity_hash ]]; then
-    log_error "source_url: <integrity-hash> argument missing. Use \`direnv fetchurl $url\` to find out the hash."
+    log_error "source_url: <integrity-hash> argument missing. Use \`powerenv fetchurl $url\` to find out the hash."
     return 1
   fi
 
@@ -486,40 +486,40 @@ source_url() {
   source "$path"
 }
 
-# Usage: direnv_load <command-generating-dump-output>
-#   e.g: direnv_load opam-env exec -- "$direnv" dump
+# Usage: powerenv_load <command-generating-dump-output>
+#   e.g: powerenv_load opam-env exec -- "$powerenv" dump
 #
 # Applies the environment generated by running <argv> as a
 # command. This is useful for adopting the environment of a child
-# process - cause that process to run "direnv dump" and then wrap
-# the results with direnv_load.
+# process - cause that process to run "powerenv dump" and then wrap
+# the results with powerenv_load.
 #
 # shellcheck disable=SC1090
-direnv_load() {
+powerenv_load() {
   # Backup watches in case of `nix-shell --pure`
-  local prev_watches=$DIRENV_WATCHES
-  local temp_dir output_file script_file exit_code old_direnv_dump_file_path
+  local prev_watches=$powerenv_WATCHES
+  local temp_dir output_file script_file exit_code old_powerenv_dump_file_path
 
   # Prepare a temporary place for dumps and such.
-  temp_dir=$(mktemp -dt direnv.XXXXXX) || {
+  temp_dir=$(mktemp -dt powerenv.XXXXXX) || {
     log_error "Could not create temporary directory."
     return 1
   }
   output_file="$temp_dir/output"
   script_file="$temp_dir/script"
-  old_direnv_dump_file_path=${DIRENV_DUMP_FILE_PATH:-}
+  old_powerenv_dump_file_path=${powerenv_DUMP_FILE_PATH:-}
 
   # Chain the following commands explicitly so that we can capture the exit code
   # of the whole chain. Crucially this ensures that we don't return early (via
   # `set -e`, for example) and hence always remove the temporary directory.
   touch "$output_file" &&
-    DIRENV_DUMP_FILE_PATH="$output_file" "$@" &&
+    powerenv_DUMP_FILE_PATH="$output_file" "$@" &&
     { test -s "$output_file" || {
-        log_error "Environment not dumped; did you invoke 'direnv dump'?"
+        log_error "Environment not dumped; did you invoke 'powerenv dump'?"
         false
       }
     } &&
-    "$direnv" apply_dump "$output_file" > "$script_file" &&
+    "$powerenv" apply_dump "$output_file" > "$script_file" &&
     source "$script_file" ||
       exit_code=$?
 
@@ -527,27 +527,27 @@ direnv_load() {
   rm -rf "$temp_dir"
 
   # Restore watches if the dump wiped them
-  if [[ -z "${DIRENV_WATCHES:-}" ]]; then
-    export DIRENV_WATCHES=$prev_watches
+  if [[ -z "${powerenv_WATCHES:-}" ]]; then
+    export powerenv_WATCHES=$prev_watches
   fi
 
-  # Restore DIRENV_DUMP_FILE_PATH if needed
-  if [[ -n "$old_direnv_dump_file_path" ]]; then
-    export DIRENV_DUMP_FILE_PATH=$old_direnv_dump_file_path
+  # Restore powerenv_DUMP_FILE_PATH if needed
+  if [[ -n "$old_powerenv_dump_file_path" ]]; then
+    export powerenv_DUMP_FILE_PATH=$old_powerenv_dump_file_path
   else
-    unset DIRENV_DUMP_FILE_PATH
+    unset powerenv_DUMP_FILE_PATH
   fi
 
   # Exit accordingly
   return ${exit_code:-0}
 }
 
-# Usage: direnv_apply_dump <file>
+# Usage: powerenv_apply_dump <file>
 #
-# Loads the output of `direnv dump` that was stored in a file.
-direnv_apply_dump() {
+# Loads the output of `powerenv dump` that was stored in a file.
+powerenv_apply_dump() {
   local path=$1
-  eval "$("$direnv" apply_dump "$path")"
+  eval "$("$powerenv" apply_dump "$path")"
 }
 
 # Usage: PATH_add <path> [<path> ...]
@@ -753,12 +753,12 @@ layout() {
 
 # Usage: layout go
 #
-# Adds "$(direnv_layout_dir)/go" to the GOPATH environment variable.
+# Adds "$(powerenv_layout_dir)/go" to the GOPATH environment variable.
 # And also adds "$PWD/bin" to the PATH environment variable.
 #
 layout_go() {
-  path_add GOPATH "$(direnv_layout_dir)/go"
-  PATH_add "$(direnv_layout_dir)/go/bin"
+  path_add GOPATH "$(powerenv_layout_dir)/go"
+  PATH_add "$(powerenv_layout_dir)/go/bin"
 }
 
 # Usage: layout node
@@ -775,7 +775,7 @@ layout_node() {
 #
 layout_perl() {
   local libdir
-  libdir=$(direnv_layout_dir)/perl5
+  libdir=$(powerenv_layout_dir)/perl5
   export LOCAL_LIB_DIR=$libdir
   export PERL_MB_OPT="--install_base '$libdir'"
   export PERL_MM_OPT="INSTALL_BASE=$libdir"
@@ -796,7 +796,7 @@ layout_php() {
 # Creates and loads a virtual environment.
 # You can specify the path of the virtual environment through VIRTUAL_ENV
 # environment variable, otherwise it will be set to
-# "$direnv_layout_dir/python-$python_version".
+# "$powerenv_layout_dir/python-$python_version".
 # For python older then 3.3 this requires virtualenv to be installed.
 #
 # It's possible to specify the python executable if you want to use different
@@ -806,7 +806,7 @@ layout_python() {
   local old_env
   local python=${1:-python}
   [[ $# -gt 0 ]] && shift
-  old_env=$(direnv_layout_dir)/virtualenv
+  old_env=$(powerenv_layout_dir)/virtualenv
   unset PYTHONHOME
   if [[ -d $old_env && $python == python ]]; then
     VIRTUAL_ENV=$old_env
@@ -824,7 +824,7 @@ layout_python() {
       realpath.absolute "$VIRTUAL_ENV"
       VIRTUAL_ENV=$REPLY
     else
-      VIRTUAL_ENV=$(direnv_layout_dir)/python-$python_version
+      VIRTUAL_ENV=$(powerenv_layout_dir)/python-$python_version
     fi
     case $ve in
       "venv")
@@ -995,7 +995,7 @@ layout_pipenv() {
 # Uses pyenv and layout_python to create and load a virtual environment.
 # You can specify the path of the virtual environment through VIRTUAL_ENV
 # environment variable, otherwise it will be set to
-# "$direnv_layout_dir/python-$python_version".
+# "$powerenv_layout_dir/python-$python_version".
 #
 layout_pyenv() {
   unset PYENV_VERSION
@@ -1023,20 +1023,20 @@ layout_pyenv() {
 
 # Usage: layout ruby
 #
-# Sets the GEM_HOME environment variable to "$(direnv_layout_dir)/ruby/RUBY_VERSION".
+# Sets the GEM_HOME environment variable to "$(powerenv_layout_dir)/ruby/RUBY_VERSION".
 # This forces the installation of any gems into the project's sub-folder.
 # If you're using bundler it will create wrapper programs that can be invoked
 # directly instead of using the $(bundle exec) prefix.
 #
 layout_ruby() {
-  BUNDLE_BIN=$(direnv_layout_dir)/bin
+  BUNDLE_BIN=$(powerenv_layout_dir)/bin
 
   if ruby -e "exit Gem::VERSION > '2.2.0'" 2>/dev/null; then
-    GEM_HOME=$(direnv_layout_dir)/ruby
+    GEM_HOME=$(powerenv_layout_dir)/ruby
   else
     local ruby_version
     ruby_version=$(ruby -e"puts (defined?(RUBY_ENGINE) ? RUBY_ENGINE : 'ruby') + '-' + RUBY_VERSION")
-    GEM_HOME=$(direnv_layout_dir)/ruby-${ruby_version}
+    GEM_HOME=$(powerenv_layout_dir)/ruby-${ruby_version}
   fi
 
   export BUNDLE_BIN
@@ -1247,7 +1247,7 @@ use_nodenv() {
 # (e.g `use nix -p ocaml`).
 #
 use_nix() {
-  direnv_load nix-shell --show-trace "$@" --run "$(join_args "$direnv" dump)"
+  powerenv_load nix-shell --show-trace "$@" --run "$(join_args "$powerenv" dump)"
   if [[ $# == 0 ]]; then
     watch_file default.nix shell.nix
   fi
@@ -1266,8 +1266,8 @@ use_nix() {
 use_flake() {
   watch_file flake.nix
   watch_file flake.lock
-  mkdir -p "$(direnv_layout_dir)"
-  eval "$(nix print-dev-env --profile "$(direnv_layout_dir)/flake-profile" "$@")"
+  mkdir -p "$(powerenv_layout_dir)"
+  eval "$(nix print-dev-env --profile "$(powerenv_layout_dir)/flake-profile" "$@")"
 }
 
 # Usage: use_guix [...]
@@ -1287,20 +1287,20 @@ use_guix() {
 # Usage: use_vim [<vimrc_file>]
 #
 # Prepends the specified vim script (or .vimrc.local by default) to the
-# `DIRENV_EXTRA_VIMRC` environment variable.
+# `powerenv_EXTRA_VIMRC` environment variable.
 #
-# This variable is understood by the direnv/direnv.vim extension. When found,
+# This variable is understood by the powerenv/powerenv.vim extension. When found,
 # it will source it after opening files in the directory.
 use_vim() {
   local extra_vimrc=${1:-.vimrc.local}
-  path_add DIRENV_EXTRA_VIMRC "$extra_vimrc"
+  path_add powerenv_EXTRA_VIMRC "$extra_vimrc"
 }
 
-# Usage: direnv_version <version_at_least>
+# Usage: powerenv_version <version_at_least>
 #
-# Checks that the direnv version is at least old as <version_at_least>.
-direnv_version() {
-  "$direnv" version "$@"
+# Checks that the powerenv version is at least old as <version_at_least>.
+powerenv_version() {
+  "$powerenv" version "$@"
 }
 
 # Usage: on_git_branch [<branch_name>] OR on_git_branch -r [<regexp>]
@@ -1364,25 +1364,25 @@ __main__() {
 
   __dump_at_exit() {
     local ret=$?
-    "$direnv" dump json "" >&3
+    "$powerenv" dump json "" >&3
     trap - EXIT
     exit "$ret"
   }
   trap __dump_at_exit EXIT
 
-  # load direnv libraries
-  for lib in "$direnv_config_dir/lib/"*.sh; do
+  # load powerenv libraries
+  for lib in "$powerenv_config_dir/lib/"*.sh; do
     # shellcheck disable=SC1090
     source "$lib"
   done
 
-  # load the global ~/.direnvrc if present
-  if [[ -f $direnv_config_dir/direnvrc ]]; then
+  # load the global ~/.powerenvrc if present
+  if [[ -f $powerenv_config_dir/powerenvrc ]]; then
     # shellcheck disable=SC1090,SC1091
-    source "$direnv_config_dir/direnvrc" >&2
-  elif [[ -f $HOME/.direnvrc ]]; then
+    source "$powerenv_config_dir/powerenvrc" >&2
+  elif [[ -f $HOME/.powerenvrc ]]; then
     # shellcheck disable=SC1090,SC1091
-    source "$HOME/.direnvrc" >&2
+    source "$HOME/.powerenvrc" >&2
   fi
 
   # and finally load the .envrc

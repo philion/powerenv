@@ -5,16 +5,16 @@
   * doc: Add stdlib's layout_pyenv to docs (#969)
   * doc: Fix broken link (#991)
   * doc: Minor typo fix (#1013)
-  * doc: `$XDG_CONFIG_HOME/direnv/direnv.toml` => add (typically ~/.config/direnv/direnv.toml) (#985)
+  * doc: `$XDG_CONFIG_HOME/powerenv/powerenv.toml` => add (typically ~/.config/powerenv/powerenv.toml) (#985)
   * doc: add quickenv to Related projects (#970)
   * feat: Update layout anaconda to accept a path to a yml file (#962)
-  * feat: install.sh: can specify direnv version (#1012)
+  * feat: install.sh: can specify powerenv version (#1012)
   * fix: elvish: replace deprecated `except` with `catch` (#987)
-  * fix: installer.sh: make direnv executable for all
+  * fix: installer.sh: make powerenv executable for all
   * fix: path escaping (#975)
   * fix: stdlib: only use ANSI escape on TTY (#958)
-  * fix: test: remove mentions of DIRENV_MTIME (#1009)
-  * fix: test: use lowercase -d flag for base64 decoding of DIRENV_DIFF (#996)
+  * fix: test: remove mentions of powerenv_MTIME (#1009)
+  * fix: test: use lowercase -d flag for base64 decoding of powerenv_DIFF (#996)
   * update: build(deps): bump github.com/BurntSushi/toml from 1.1.0 to 1.2.0 (#974)
 
 2.32.1 / 2022-06-21
@@ -42,10 +42,10 @@
   * fix: stdlib.sh: remove dependency on tput (#932)
   * fix: Use setenv in vim to allow non alphanumeric vars (#901)
   * fix: install.sh: add information about bin_path (#920)
-  * fix: Treat `mingw*` as windows (direnv/direnv#918) (#919)
+  * fix: Treat `mingw*` as windows (powerenv/powerenv#918) (#919)
   * fix: man: clarify paths (#929)
   * fix: installation.md: Fix Fedora package link (#915)
-  * Merge pull request #874 from direnv/refactor
+  * Merge pull request #874 from powerenv/refactor
   * chore: rc: stop using --noprofile --norc
   * chore: rc: prepare stdin earlier
   * chore: rc: install interrupt handler earlier
@@ -69,7 +69,7 @@
 ==================
 
   * Don't load .env files by default (#911)
-  * doc: `~/.config/direnv/direnvrc` is the default
+  * doc: `~/.config/powerenv/powerenvrc` is the default
   * doc: fix the broken link to arch linux (#892)
   * Re-add accidentally deleted comment line (#881)
   * fix version test
@@ -97,7 +97,7 @@
 ==================
 
   * Add automatic `.env` load (#845)
-  * Resolve symlinks during `direnv deny` (#851)
+  * Resolve symlinks during `powerenv deny` (#851)
   * update installer for Apple Silicon (#849)
   * stdlib: use_flake handle no layout dir (#861)
   * embed stdlib.sh (#782)
@@ -109,7 +109,7 @@
 ==================
 
   * stdlib: add use_flake function (#847)
-  * docs(direnv.toml) Add config.toml clarification (#831)
+  * docs(powerenv.toml) Add config.toml clarification (#831)
   * docs(install): fix macos links (#841)
   * Corrects stdlib link in Ruby docs (#837)
   * stdlib.sh: Fix removal of temp file (#830)
@@ -131,8 +131,8 @@
   * tcsh: fix variable escaping (#778)
   * Change DESTDIR to PREFIX in development.md (#774)
   * go: use the /v2 prefix (#765)
-  * Relax README's recommendation for nix-direnv (#763)
-  * man/direnv.1.md: add FILES section (fix #758) (#759)
+  * Relax README's recommendation for nix-powerenv (#763)
+  * man/powerenv.1.md: add FILES section (fix #758) (#759)
   * Add/update fish tests (#754)
   * build(deps): bump golang.org/x/mod from 0.4.0 to 0.4.1 (#749)
   * Fix typo "avaible" in install.sh (#750)
@@ -177,14 +177,14 @@ to do another release.
 
   * dist: add linux/arm64 and linux/ppc64
   * Added use_nodenv to stdlib (#727)
-  * Fix proposal for  #707, broken direnv compatibility under Windows (#723)
+  * Fix proposal for  #707, broken powerenv compatibility under Windows (#723)
   * fix: layout anaconda <env_name_or_prefix> (#717)
   * Add on_git_branch command to detect whether a specific git branch is checked out (#702)
 
 2.24.0 / 2020-11-15
 ==================
 
-  * direnv_load: avoid leaking DIRENV_DUMP_FILE_PATH (#715)
+  * powerenv_load: avoid leaking powerenv_DUMP_FILE_PATH (#715)
   * Add strict_env and unstrict_env (#572)
   * stdlib: add `use_vim` to source local vimrc (#497)
   * stdlib: add source_env_if_exists (#714)
@@ -207,15 +207,15 @@ to do another release.
 ==================
 
   * stdlib: add source_url function (#562)
-  * direnv: add fetchurl command (#686)
+  * powerenv: add fetchurl command (#686)
   * shell: Update Elvish hook to replace deprecated `explode` (#685)
 
 2.22.1 / 2020-10-06
 ==================
 
-  * Look for stdlib in DIRENV_CONFIG (#679)
+  * Look for stdlib in powerenv_CONFIG (#679)
   * stdlib: use Bash 3.0-compatible array expansion (#676)
-  * Clarify path to direnv.toml (#678)
+  * Clarify path to powerenv.toml (#678)
   * stdlib/use_julia: fix a bug in parameter substitution for empty or (#667)
   * man: update the layout_go documentation
   * stdlib:  adds GOPATH/bin to PATH (#670)
@@ -225,7 +225,7 @@ to do another release.
 
   * stdlib: use_julia <version> (#666)
   * stdlib: semver_search (#665)
-  * direnv-stdlib.1: add layout julia (#661)
+  * powerenv-stdlib.1: add layout julia (#661)
   * README: spelling correction (#660)
   * README.md: add shadowenv to similar projects (#659)
   * docs: remove Snap from the installations
@@ -238,23 +238,23 @@ to do another release.
 2.21.3 / 2020-05-08
 ==================
 
-  * Replace `direnv expand_path` with pure bash (#631)
+  * Replace `powerenv expand_path` with pure bash (#631)
   * Fix #594 - write error to fd 3 on Windows (#634)
-  * Make direnv hook output work on Windows (#632)
+  * Make powerenv hook output work on Windows (#632)
   * Update hook.md to remove ">" typo in Fish instructions (#624)
   * stdlib: `layout go` adds layout dir to GOPATH (#622)
-  * direnv-stdlib.1: add layout php (#619)
+  * powerenv-stdlib.1: add layout php (#619)
   * stdlib: add PATH_rm <pattern> [<pattern> ...] (#615)
   * Error handling tuples (#610)
   * Merge pull request #607 from punitagrawal/master
   * test: elvish: Fix evaluation function
   * stdlib.sh: Re-write grep pattern to avoid shell escape
   * man: Escape '.' at the beginning of line to remove manpage warning
-  * stdlib: fix direnv_config_dir usage (#601)
-  * direnv version: improve error message (#599)
+  * stdlib: fix powerenv_config_dir usage (#601)
+  * powerenv version: improve error message (#599)
   * README: fix NixOS link in installation.md (#589)
-  * stdlib: add direnv_apply_dump <file> (#587)
-  * Simplify direnv_load and make it work even when the command crashes. (#568)
+  * stdlib: add powerenv_apply_dump <file> (#587)
+  * Simplify powerenv_load and make it work even when the command crashes. (#568)
   * docs: fix fish installation instruction
   * test: test for utf-8 compatibility
   * config: add [global] section
@@ -271,7 +271,7 @@ Making things stable again.
 
   * stdlib: revert the `set -euo pipefail` change. It was causing too many
     issues for users.
-  * direnv allow: fix the allow migration by also creating the parent target
+  * powerenv allow: fix the allow migration by also creating the parent target
     directory.
 
 2.21.1 / 2020-01-26
@@ -294,11 +294,11 @@ This is a massive release!
 You can now hit Ctrl-C during a long reload in bash and zsh and it will not
 loop anymore.
 
-Commands that use `direnv_load` won't fail when there is an output to stdout
+Commands that use `powerenv_load` won't fail when there is an output to stdout
 anymore (eg: `use_nix`).
 
-Direnv now also loads files from `.config/direnv/lib/*.sh`. This is intended
-to be used by third-party tools to augment direnv with their own stdlib
+powerenv now also loads files from `.config/powerenv/lib/*.sh`. This is intended
+to be used by third-party tools to augment powerenv with their own stdlib
 functions.
 
 The `.envrc` is now loaded with `set -euo pipefail`. This will more likely
@@ -307,19 +307,19 @@ expose issues with existing `.envrc` files.
 ## docs
 
   * Update README.md (#536)
-  * Add link to asdf-direnv. (#535)
+  * Add link to asdf-powerenv. (#535)
   * docs: fix invalid link (#533)
   * adds experimental curl based installer (#539)
 
 ## commands
 
   * change where the allow files are being stored
-  * direnv status: also show the config
-  * direnv exec: improve the error message
+  * powerenv status: also show the config
+  * powerenv exec: improve the error message
   * warn if PS1 is being exported
   * handle SIGINT during export in bash
   * export: display the full RC path instead of a relative one
-  * direnv exec: the DIR argument is always required (#493)
+  * powerenv exec: the DIR argument is always required (#493)
 
 ## build
 
@@ -334,17 +334,17 @@ expose issues with existing `.envrc` files.
 
   * fix elvish hook
   * Use `fish_preexec` hook instead of `fish_prompt` (#512)
-  * Use `fish_postexec` to make sure direnv hook executed 'after' the directory has changed when using `cd`.
+  * Use `fish_postexec` to make sure powerenv hook executed 'after' the directory has changed when using `cd`.
   * improve zsh hook (#514)
 
 ## config.toml
 
-  * rename the configuration from config.toml to direnv.toml (#498)
-  * add warn_timeout option. DIRENV_WARN_TIMEOUT is now deprecated.
+  * rename the configuration from config.toml to powerenv.toml (#498)
+  * add warn_timeout option. powerenv_WARN_TIMEOUT is now deprecated.
 
 ## stdlib
 
-  * `direnv_load` can now handle stdout outputs
+  * `powerenv_load` can now handle stdout outputs
   * stdlib: add layout_julia
   * Handle failing pipenv on empty file and avoid an extra pipenv execution (#510)
   * fix `source_env` behaviour when the file doesn't exists (#487)
@@ -354,10 +354,10 @@ expose issues with existing `.envrc` files.
   * Fix `source_up` docs to explain that search starts in parent directory (#518)
   * fix `path_add` to not leak local variables
   * `layout_pyenv`: support multiple python versions (#525)
-  * Add a `direnv_version <version_at_least>` command to check the direnv
+  * Add a `powerenv_version <version_at_least>` command to check the powerenv
     version.
   * `dotenv`: handle undefined variables
-  * source files from `.config/direnv/lib/*.sh`
+  * source files from `.config/powerenv/lib/*.sh`
   * stdlib: set `-euo pipefail`
 
 2.20.1 / 2019-03-31
@@ -398,7 +398,7 @@ expose issues with existing `.envrc` files.
 2.18.2 / 2018-11-23
 ==================
 
-  * make: generate direnv.exe on windows (#417)
+  * make: generate powerenv.exe on windows (#417)
 
 2.18.1 / 2018-11-22
 ==================
@@ -410,10 +410,10 @@ expose issues with existing `.envrc` files.
 
 A lot of changes!
 
-  * stdlib: add DIRENV_IN_ENVRC (#414)
+  * stdlib: add powerenv_IN_ENVRC (#414)
   * Fix typo in readme. (#412)
-  * Merge pull request #407 from zimbatm/direnv-dump-shell
-  * direnv dump can now dump to arbitrary shells
+  * Merge pull request #407 from zimbatm/powerenv-dump-shell
+  * powerenv dump can now dump to arbitrary shells
   * add a new "gzenv" shell
   * move gzenv into new package
   * shell: introduce a dump capability
@@ -424,7 +424,7 @@ A lot of changes!
   * Merge pull request #397 from zimbatm/readme-packaging-status
   * README: add packaging status badge
   * README: remove equinox installation
-  * direnv show_dump: new command to debug encoded env (#395)
+  * powerenv show_dump: new command to debug encoded env (#395)
   * Document possibility to unset vars (#392)
   * stdlib: fix typo
   * go dep: update Gopkg.lock
@@ -442,8 +442,8 @@ A lot of changes!
 2.17.0 / 2018-06-17
 ==================
 
-  * CHANGE: hook expands the direnv path. Ensures that direnv can be executed even if the PATH is changed #369.
-  * CHANGE: stdlib: direnv_load: disallow watching in child
+  * CHANGE: hook expands the powerenv path. Ensures that powerenv can be executed even if the PATH is changed #369.
+  * CHANGE: stdlib: powerenv_load: disallow watching in child
     Allows the `use nix --pure` scenario in #368
   * README: add OpenSuSE to the list of distros
   * Revert "use_nix: unset IN_NIX_SHELL"
@@ -479,8 +479,8 @@ A lot of changes!
 ==================
 
   * NEW: Add support for Pipenv layout (#314)
-  * CHANGE: direnv version: make public
-  * FIX: direnv edit: run the command through bash
+  * CHANGE: powerenv version: make public
+  * FIX: powerenv edit: run the command through bash
   * FIX: website: update ditto to v0.15
 
 2.13.3 / 2017-11-30
@@ -491,7 +491,7 @@ A lot of changes!
 2.13.2 / 2017-11-28
 ==================
 
-  * FIX: direnv edit: fix path escaping
+  * FIX: powerenv edit: fix path escaping
   * FIX: stdlib: fix find_up
   * FIX: stdlib: use absolute path in source_up
   * FIX: remove ruby as a build dependency
@@ -500,13 +500,13 @@ A lot of changes!
 2.13.1 / 2017-09-27
 ==================
 
-  * FIX: stdlib: make direnv_layout_dir lazy (#298)
+  * FIX: stdlib: make powerenv_layout_dir lazy (#298)
 
 2.13.0 / 2017-09-24
 ==================
 
-  * NEW: stdlib: configurable direnv_layout_dir
-  * CHANGE: stdlib: source the direnvrc directly
+  * NEW: stdlib: configurable powerenv_layout_dir
+  * CHANGE: stdlib: source the powerenvrc directly
   * FIX: permit empty NODE_VERSION_PREFIX variable
   * FIX: pwd: Don't use -P to remove symlinks (#295)
   * FIX: also reload when mtime goes back in time
@@ -529,7 +529,7 @@ A lot of changes!
 ==================
 
   * NEW: support multiple items in path_add and PATH_add (#276)
-  * NEW: add a configurable DIRENV_WARN_TIMEOUT option (#273)
+  * NEW: add a configurable powerenv_WARN_TIMEOUT option (#273)
   * CHANGE: rewrite the dotenv parsing, now supports commented lines
   * CHANGE: pass additional args to virtualenv (#261)
   * FIX: stdlib watch_file(): escaping fix
@@ -556,7 +556,7 @@ A lot of changes!
 
   * NEW: stdlib.sh: introduce MANPATH_add <path> (#248)
   * NEW: provide packages using the equinox service
-  * CHANGE: test direnv with go 1.8 (#254)
+  * CHANGE: test powerenv with go 1.8 (#254)
   * FIX: Add warning about source_env/up
   * FIX: go-md2man install instruction
 
@@ -573,7 +573,7 @@ A lot of changes!
 
   * NEW: use_nix() is now watching default.nix and shell.nix
   * NEW: Allow to fix the bash path at built time
-  * FIX: Panic on `direnv current` with no argument
+  * FIX: Panic on `powerenv current` with no argument
   * FIX: Permit empty NODE_VERSION_PREFIX variable
   * FIX: layout_python: fail properly when python is not found
 
@@ -585,13 +585,13 @@ A lot of changes!
 2.8.0 / 2016-03-27
 ==================
 
-  * NEW: `direnv export json` to facilitate IDE integration
+  * NEW: `powerenv export json` to facilitate IDE integration
   * NEW: watch functionality thanks to @avnik
-    Now direnv also reload on associate .env and .envrc changes.
+    Now powerenv also reload on associate .env and .envrc changes.
   * NEW: stdlib `watch_file` function thanks to @avnik
     Allows to monitor more files for change.
   * NEW: stdlib `use node` function thanks to @wilmoore
-  * NEW: `direnv prune` to remove old allowed files thanks to @punitagrawal
+  * NEW: `powerenv prune` to remove old allowed files thanks to @punitagrawal
     Only works with newly-generated files since we're not storing the path
     inside of them.
 
@@ -614,9 +614,9 @@ A lot of changes!
 ==================
 
   * NEW: tcsh is now supported ! Thanks @bbense
-  * CHANGE: `direnv dump` now ignores `BASH_FUNC_` exports. Thanks @gfxmonk
+  * CHANGE: `powerenv dump` now ignores `BASH_FUNC_` exports. Thanks @gfxmonk
   * CHANGE: Interactive input during load is now possible. Thanks @toao
-  * FIX: allow workaround for tmux users: `alias tmux='direnv exec / tmux'`
+  * FIX: allow workaround for tmux users: `alias tmux='powerenv exec / tmux'`
   * FIX: hardened fish shell escaping thanks to @gfxmonk
 
 Thanks @bbense @vially and @dadooda for corrections in the docs
@@ -625,7 +625,7 @@ Thanks @bbense @vially and @dadooda for corrections in the docs
 ==================
 
   * NEW: Use a different virtualenv per python versions for easier version
-    switching. Eg: ./.direnv/python-${python_version}
+    switching. Eg: ./.powerenv/python-${python_version}
   * NEW: Makes `layout python3` a shortcut for `layout python python3`. Thanks
     @ghickman !
   * NEW: Allows to specify which executable of python to use in `layout_python`
@@ -640,12 +640,12 @@ Thanks @bbense @vially and @dadooda for corrections in the docs
  * NEW: Preliminary support for vim
  * NEW: New site: put the doc inside the project so it stays in sync
  * NEW: Support for Cygwin - Thanks @CMCDragonkai !
- * NEW: Allow to disable logging by setting an empty `DIRENV_LOG_FORMAT`
+ * NEW: Allow to disable logging by setting an empty `powerenv_LOG_FORMAT`
  * NEW: stdlib `layout perl`. Thanks @halkeye !
  * CHANGE: layout ruby: share the gem home starting from rubygems v2.2.0
  * CHANGE: Allow arbitrary number of args in `log_status`
  * CHANGE: Bump command timeout to 5 seconds
- * FIX: Adds selected bash executable in `direnv status`
+ * FIX: Adds selected bash executable in `powerenv status`
  * FIX: man changes, replaced abandoned ronn by md2man
  * FIX: `make install` was creating a ./bin directory
  * FIX: issue #114 - work for blank envs. Thanks @pwaller !
@@ -658,14 +658,14 @@ Thanks @bbense @vially and @dadooda for corrections in the docs
 2.3.0 / 2014-02-06
 ==================
 
- * NEW: DIRENV_LOG_FORMAT environment variable can be used tocontrol log formatting
- * NEW: `direnv exec [DIR] <COMMAND>` to execute programs with an .envrc context
+ * NEW: powerenv_LOG_FORMAT environment variable can be used tocontrol log formatting
+ * NEW: `powerenv exec [DIR] <COMMAND>` to execute programs with an .envrc context
  * CHANGE: layout_python now tries to make your virtualenv relocatable
  * CHANGE: the export diff is not from the old env, not the current env
  * CHANGE: layout_go now also adds $PWD/bin in the PATH
- * FIX: Hides the DIRENV_ variables in the output diff. Fixes #94
+ * FIX: Hides the powerenv_ variables in the output diff. Fixes #94
  * FIX: Makes sure the path used in the allow hash is absolute. See #95
- * FIX: Set the executable bit on direnv on install
+ * FIX: Set the executable bit on powerenv on install
  * FIX: Some bash installs had a parse error in the hook.
 
 2.2.1 / 2014-01-12
@@ -674,21 +674,21 @@ Thanks @bbense @vially and @dadooda for corrections in the docs
 The last release was heavily broken. Ooops !
 
  * FIX: Refactored the whole export and diff mechanism. Fixes #92 regression.
- * CHANGE: DIRENV_BACKUP has been renamed to DIRENV_DIFF
+ * CHANGE: powerenv_BACKUP has been renamed to powerenv_DIFF
 
 2.2.0 / 2014-01-11
 ==================
 
-Restart your shells on upgrade, the format of DIRENV_BACKUP has changed and is
+Restart your shells on upgrade, the format of powerenv_BACKUP has changed and is
 incompatible with previous versions.
 
- * NEW: `direnv_load <command-that-outputs-a-direnv-dump>` stdlib function
+ * NEW: `powerenv_load <command-that-outputs-a-powerenv-dump>` stdlib function
  * CHANGE: Only backup the diff of environments. Fixes #82
- * CHANGE: Renames `$DIRENV_PATH` to `$direnv` in the stdlib.
+ * CHANGE: Renames `$powerenv_PATH` to `$powerenv` in the stdlib.
  * CHANGE: Allow/Deny mechanism now includes the path to make it more secure.
- * CHANGE: `direnv --help` is an alias to `direnv help`
+ * CHANGE: `powerenv --help` is an alias to `powerenv help`
  * CHANGE: more consistent log outputs and error messages
- * CHANGE: `direnv edit` only auto-allows the .envrc if it's mtime has changed.
+ * CHANGE: `powerenv edit` only auto-allows the .envrc if it's mtime has changed.
  * CHANGE: Fixes old bash (OSX) segfault in some cases. See #81
  * CHANGE: The stdlib `dotenv` now supports more .env syntax
  * FIX: Restore the environment properly after loading errors.
@@ -700,7 +700,7 @@ incompatible with previous versions.
  * Stop recommending using $0 to detect the shell. Fixes #64.
  * Makes the zsh hook resistant to double-hooking.
  * Makes the bash hook resistant to double-hooking.
- * More precise direnv allow error message. Fixes #72
+ * More precise powerenv allow error message. Fixes #72
 
 2.0.1 / 2013-07-27
 ==================
@@ -710,7 +710,7 @@ incompatible with previous versions.
 2.0.0 / 2013-06-16
 ==================
 
-When upgrading from direnv 1.x make sure to restart your shell. The rest is
+When upgrading from powerenv 1.x make sure to restart your shell. The rest is
 relatively backward-compatible.
 
  * changed the execution model. Everything is in a single static executable
@@ -718,5 +718,5 @@ relatively backward-compatible.
  * robust shell escaping (supports UTF-8 in env vars)
  * robust eval/export loop, avoids retrys on every prompt if there is an error
  * stdlib: added the `dotenv [PATH]` command to load .env files
- * command: added `direnv reload` to force-reload your environment
+ * command: added `powerenv reload` to force-reload your environment
 

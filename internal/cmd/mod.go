@@ -10,7 +10,7 @@ var (
 	version  string
 )
 
-// Main is the main entrypoint to direnv
+// Main is the main entrypoint to powerenv
 func Main(env Env, args []string, modBashPath string, modStdlib string, modVersion string) error {
 	// We drop $PWD from caller since it can include symlinks, which will
 	// break relative path access when finding .envrc or .env in a parent.

@@ -7,7 +7,7 @@ import (
 	"strings"
 )
 
-// CmdExport is `direnv export $0`
+// CmdExport is `powerenv export $0`
 var CmdExport = &Cmd{
 	Name:    "export",
 	Desc:    "loads an .envrc or .env and prints the diff in terms of exports",
@@ -51,7 +51,7 @@ func exportCommand(currentEnv Env, args []string, config *Config) (err error) {
 	case toLoad == "":
 		logDebug("no RC found, unloading")
 	case loadedRC == nil:
-		logDebug("no RC (implies no DIRENV_DIFF),loading")
+		logDebug("no RC (implies no powerenv_DIFF),loading")
 	case loadedRC.path != toLoad:
 		logDebug("new RC, loading")
 	case loadedRC.times.Check() != nil:
@@ -105,14 +105,14 @@ func diffStatus(oldDiff *EnvDiff) string {
 		var out []string
 		for key := range oldDiff.Prev {
 			_, ok := oldDiff.Next[key]
-			if !ok && !direnvKey(key) {
+			if !ok && !powerenvKey(key) {
 				out = append(out, "-"+key)
 			}
 		}
 
 		for key := range oldDiff.Next {
 			_, ok := oldDiff.Prev[key]
-			if direnvKey(key) {
+			if powerenvKey(key) {
 				continue
 			}
 			if ok {
@@ -128,6 +128,6 @@ func diffStatus(oldDiff *EnvDiff) string {
 	return ""
 }
 
-func direnvKey(key string) bool {
-	return strings.HasPrefix(key, "DIRENV_")
+func powerenvKey(key string) bool {
+	return strings.HasPrefix(key, "powerenv_")
 }

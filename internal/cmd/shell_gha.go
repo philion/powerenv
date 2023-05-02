@@ -26,7 +26,7 @@ func (sh gha) Export(e ShellExport) string {
 	return b.String()
 }
 
-const ghaDelim = "DIRENV_GITHUB_ACTIONS_EOV\n"
+const ghaDelim = "powerenv_GITHUB_ACTIONS_EOV\n"
 
 func (sh gha) Dump(env Env) string {
 	var b strings.Builder

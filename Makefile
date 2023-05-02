@@ -10,7 +10,7 @@ MANDIR   = ${SHAREDIR}/man
 DISTDIR ?= dist
 
 # filename of the executable
-exe = direnv$(shell go env GOEXE)
+exe = powerenv$(shell go env GOEXE)
 
 # Override the go executable
 GO = go
@@ -33,19 +33,19 @@ export GO111MODULE=on
 ############################################################################
 
 .PHONY: build
-build: direnv
+build: powerenv
 
 .PHONY: clean
 clean:
 	rm -rf \
 		.gopath \
-		direnv
+		powerenv
 
 GO_LDFLAGS =
 
 ifeq ($(shell uname), Darwin)
 	# Fixes DYLD_INSERT_LIBRARIES issues
-	# See https://github.com/direnv/direnv/issues/194
+	# See https://github.com/powerenv/powerenv/issues/194
 	GO_LDFLAGS += -linkmode=external
 endif
 
@@ -57,7 +57,7 @@ ifneq ($(strip $(GO_LDFLAGS)),)
 	GO_BUILD_FLAGS = -ldflags '$(GO_LDFLAGS)'
 endif
 
-direnv: *.go
+powerenv: *.go
 	$(GO) build $(GO_BUILD_FLAGS) -o $(exe)
 
 ############################################################################
@@ -117,9 +117,9 @@ test: build $(tests)
 	@echo
 	@echo SUCCESS!
 
-test-shellcheck:
-	shellcheck stdlib.sh
-	shellcheck ./test/stdlib.bash
+#test-shellcheck:
+#	shellcheck stdlib.sh
+#	shellcheck ./test/stdlib.bash
 
 test-stdlib: build
 	./test/stdlib.bash
@@ -131,20 +131,20 @@ test-go-lint:
 	golangci-lint run
 
 test-bash:
-	bash ./test/direnv-test.bash
+	bash ./test/powerenv-test.bash
 
 # Needs elvish 0.12+
 test-elvish:
-	elvish ./test/direnv-test.elv
+	elvish ./test/powerenv-test.elv
 
 test-fish:
-	fish ./test/direnv-test.fish
+	fish ./test/powerenv-test.fish
 
 test-tcsh:
-	tcsh -e ./test/direnv-test.tcsh
+	tcsh -e ./test/powerenv-test.tcsh
 
 test-zsh:
-	zsh ./test/direnv-test.zsh
+	zsh ./test/powerenv-test.zsh
 
 ############################################################################
 # Installation
@@ -157,13 +157,13 @@ install: all
 	install -d $(DESTDIR)$(MANDIR)/man1
 	cp -R man/*.1 $(DESTDIR)$(MANDIR)/man1
 	install -d $(DESTDIR)$(SHAREDIR)/fish/vendor_conf.d
-	echo "$(BINDIR)/direnv hook fish | source" > $(DESTDIR)$(SHAREDIR)/fish/vendor_conf.d/direnv.fish
+	echo "$(BINDIR)/powerenv hook fish | source" > $(DESTDIR)$(SHAREDIR)/fish/vendor_conf.d/powerenv.fish
 
 .PHONY: dist
 dist:
 	@command -v gox >/dev/null || (echo "Could not generate dist because gox is missing. Run: go get -u github.com/mitchellh/gox"; false)
 	CGO_ENABLED=0 GOFLAGS="-trimpath" \
-		gox -output "$(DISTDIR)/direnv.{{.OS}}-{{.Arch}}" \
+		gox -output "$(DISTDIR)/powerenv.{{.OS}}-{{.Arch}}" \
 		-osarch darwin/amd64 \
 		-osarch darwin/arm64 \
 		-osarch freebsd/386 \

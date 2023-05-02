@@ -1,17 +1,17 @@
-DIRENV.TOML 1 "2019" direnv "User Manuals"
+powerenv.TOML 1 "2019" powerenv "User Manuals"
 ==========================================
 
 NAME
 ----
 
-direnv.toml - the direnv configuration file
+powerenv.toml - the powerenv configuration file
 
 DESCRIPTION
 -----------
 
-A configuration file in [TOML](https://github.com/toml-lang/toml) format to specify a variety of configuration options for direnv. The file is read from `$XDG_CONFIG_HOME/direnv/direnv.toml` (typically ~/.config/direnv/direnv.toml).
+A configuration file in [TOML](https://github.com/toml-lang/toml) format to specify a variety of configuration options for powerenv. The file is read from `$XDG_CONFIG_HOME/powerenv/powerenv.toml` (typically ~/.config/powerenv/powerenv.toml).
 
-> For versions v2.21.0 and below use config.toml instead of direnv.toml
+> For versions v2.21.0 and below use config.toml instead of powerenv.toml
 
 FORMAT
 ------
@@ -36,7 +36,7 @@ The following sections are supported:
 
 ### `bash_path`
 
-This allows one to hard-code the position of bash. It maybe be useful to set this to avoid having direnv to fail when PATH is being mutated.
+This allows one to hard-code the position of bash. It maybe be useful to set this to avoid having powerenv to fail when PATH is being mutated.
 
 ### `disable_stdin`
 
@@ -62,13 +62,13 @@ Valid time units are "ns", "us" (or "µs"), "ms", "s", "m", "h".
 
 ## [whitelist]
 
-Specifying whitelist directives marks specific directory hierarchies or specific directories as "trusted" -- direnv will evaluate any matching .envrc files regardless of whether they have been specifically allowed. **This feature should be used with great care**, as anyone with the ability to write files to that directory (including collaborators on VCS repositories) will be able to execute arbitrary code on your computer.
+Specifying whitelist directives marks specific directory hierarchies or specific directories as "trusted" -- powerenv will evaluate any matching .envrc files regardless of whether they have been specifically allowed. **This feature should be used with great care**, as anyone with the ability to write files to that directory (including collaborators on VCS repositories) will be able to execute arbitrary code on your computer.
 
 There are two types of whitelist directives supported:
 
 ### `prefix`
 
-Accepts an array of strings. If any of the strings in this list are a prefix of an .envrc file's absolute path, that file will be implicitly allowed, regardless of contents or past usage of `direnv allow` or `direnv deny`.
+Accepts an array of strings. If any of the strings in this list are a prefix of an .envrc file's absolute path, that file will be implicitly allowed, regardless of contents or past usage of `powerenv allow` or `powerenv deny`.
 
 Example:
 
@@ -83,14 +83,14 @@ In this example, the following .envrc files will be implicitly allowed:
 * `/home/user/code/project-a/subdir/.envrc`
 * and so on
 
-In this example, the following .envrc files will not be implicitly allowed (although they can be explicitly allowed by running `direnv allow`):
+In this example, the following .envrc files will not be implicitly allowed (although they can be explicitly allowed by running `powerenv allow`):
 
 * `/home/user/project-b/.envrc`
 * `/opt/random/.envrc`
 
 ### `exact`
 
-Accepts an array of strings. Each string can be a directory name or the full path to an .envrc file. If a directory name is passed, it will be treated as if it had been passed as itself with `/.envrc` appended. After resolving the filename, each string will be checked for being an exact match with an .envrc file's absolute path. If they match exactly, that .envrc file will be implicitly allowed, regardless of contents or past usage of `direnv allow` or `direnv deny`.
+Accepts an array of strings. Each string can be a directory name or the full path to an .envrc file. If a directory name is passed, it will be treated as if it had been passed as itself with `/.envrc` appended. After resolving the filename, each string will be checked for being an exact match with an .envrc file's absolute path. If they match exactly, that .envrc file will be implicitly allowed, regardless of contents or past usage of `powerenv allow` or `powerenv deny`.
 
 Example:
 
@@ -104,7 +104,7 @@ In this example, the following .envrc files will be implicitly allowed, and no o
 * `/home/user/code/project-b/.envrc`
 * `/home/user/code/project-b/subdir-a`
 
-In this example, the following .envrc files will not be implicitly allowed (although they can be explicitly allowed by running `direnv allow`):
+In this example, the following .envrc files will not be implicitly allowed (although they can be explicitly allowed by running `powerenv allow`):
 
 * `/home/user/code/project-b/subproject-c/.envrc`
 * `/home/user/code/.envrc`
@@ -117,4 +117,4 @@ MIT licence - Copyright (C) 2019 @zimbatm and contributors
 SEE ALSO
 --------
 
-direnv(1), direnv-stdlib(1)
+powerenv(1), powerenv-stdlib(1)

@@ -38,10 +38,10 @@ func TestEnvDiffEmptyValue(t *testing.T) {
 }
 
 func TestIgnoredEnv(t *testing.T) {
-	if !IgnoredEnv(DIRENV_BASH) {
+	if !IgnoredEnv(powerenv_BASH) {
 		t.Fail()
 	}
-	if IgnoredEnv(DIRENV_DIFF) {
+	if IgnoredEnv(powerenv_DIFF) {
 		t.Fail()
 	}
 	if !IgnoredEnv("_") {

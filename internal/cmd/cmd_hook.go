@@ -9,11 +9,11 @@ import (
 
 // HookContext are the variables available during hook template evaluation
 type HookContext struct {
-	// SelfPath is the unescaped absolute path to direnv
+	// SelfPath is the unescaped absolute path to powerenv
 	SelfPath string
 }
 
-// CmdHook is `direnv hook $0`
+// CmdHook is `powerenv hook $0`
 var CmdHook = &Cmd{
 	Name:   "hook",
 	Desc:   "Used to setup the shell hook",

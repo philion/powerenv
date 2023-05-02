@@ -3,17 +3,17 @@ package cmd
 import (
 	"strings"
 
-	"github.com/direnv/direnv/v2/gzenv"
+	"github.com/powerenv/powerenv/v2/gzenv"
 )
 
 // IgnoredKeys is list of keys we don't want to deal with
 var IgnoredKeys = map[string]bool{
-	// direnv env config
-	"DIRENV_CONFIG": true,
-	"DIRENV_BASH":   true,
+	// powerenv env config
+	"powerenv_CONFIG": true,
+	"powerenv_BASH":   true,
 
 	// should only be available inside of the .envrc or .env
-	"DIRENV_IN_ENVRC": true,
+	"powerenv_IN_ENVRC": true,
 
 	"COMP_WORDBREAKS": true, // Avoids segfaults in bash
 	"PS1":             true, // PS1 should not be exported, fixes problem in bash

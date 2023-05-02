@@ -5,10 +5,10 @@ import (
 	"fmt"
 	"os"
 
-	"github.com/direnv/direnv/v2/gzenv"
+	"github.com/powerenv/powerenv/v2/gzenv"
 )
 
-// CmdShowDump is `direnv show_dump`
+// CmdShowDump is `powerenv show_dump`
 var CmdShowDump = &Cmd{
 	Name:    "show_dump",
 	Desc:    "Show the data inside of a dump for debugging purposes",

@@ -4,10 +4,10 @@ import (
 	"errors"
 )
 
-// CmdCurrent is `direnv current`
+// CmdCurrent is `powerenv current`
 var CmdCurrent = &Cmd{
 	Name:    "current",
-	Desc:    "Reports whether direnv's view of a file is current (or stale)",
+	Desc:    "Reports whether powerenv's view of a file is current (or stale)",
 	Args:    []string{"PATH"},
 	Private: true,
 	Action:  actionSimple(cmdCurrentAction),
@@ -21,7 +21,7 @@ func cmdCurrentAction(env Env, args []string) (err error) {
 
 	path := args[1]
 	watches := NewFileTimes()
-	watchString, ok := env[DIRENV_WATCHES]
+	watchString, ok := env[powerenv_WATCHES]
 	if ok {
 		err = watches.Unmarshal(watchString)
 		if err != nil {

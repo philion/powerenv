@@ -9,10 +9,10 @@ import (
 	"time"
 
 	toml "github.com/BurntSushi/toml"
-	"github.com/direnv/direnv/v2/xdg"
+	"github.com/powerenv/powerenv/v2/xdg"
 )
 
-// Config represents the direnv configuration and state.
+// Config represents the powerenv configuration and state.
 type Config struct {
 	Env             Env
 	WorkDir         string // Current directory
@@ -64,7 +64,7 @@ type tomlWhitelist struct {
 // Expand a path string prefixed with ~/ to the current user's home directory.
 // Example: if current user is user1 with home directory in /home/user1, then
 // ~/project -> /home/user1/project
-// It's useful to allow paths with ~/, so that direnv.toml can be reused via
+// It's useful to allow paths with ~/, so that powerenv.toml can be reused via
 // dotfiles repos across systems with different standard home paths
 // (compare Linux /home and macOS /Users).
 func expandTildePath(path string) (pathExpanded string) {
@@ -77,18 +77,18 @@ func expandTildePath(path string) (pathExpanded string) {
 	return pathExpanded
 }
 
-// LoadConfig opens up the direnv configuration from the Env.
+// LoadConfig opens up the powerenv configuration from the Env.
 func LoadConfig(env Env) (config *Config, err error) {
 	config = &Config{
 		Env: env,
 	}
 
-	config.ConfDir = env[DIRENV_CONFIG]
+	config.ConfDir = env[powerenv_CONFIG]
 	if config.ConfDir == "" {
-		config.ConfDir = xdg.ConfigDir(env, "direnv")
+		config.ConfDir = xdg.ConfigDir(env, "powerenv")
 	}
 	if config.ConfDir == "" {
-		err = fmt.Errorf("couldn't find a configuration directory for direnv")
+		err = fmt.Errorf("couldn't find a configuration directory for powerenv")
 		return
 	}
 
@@ -106,13 +106,13 @@ func LoadConfig(env Env) (config *Config, err error) {
 		return
 	}
 
-	config.RCFile = env[DIRENV_FILE]
+	config.RCFile = env[powerenv_FILE]
 
 	config.WhitelistPrefix = make([]string, 0)
 	config.WhitelistExact = make(map[string]bool)
 
 	// Load the TOML config
-	config.TomlPath = filepath.Join(config.ConfDir, "direnv.toml")
+	config.TomlPath = filepath.Join(config.ConfDir, "powerenv.toml")
 	if _, statErr := os.Stat(config.TomlPath); statErr != nil {
 		config.TomlPath = filepath.Join(config.ConfDir, "config.toml")
 		if _, statErr := os.Stat(config.TomlPath); statErr != nil {
@@ -159,17 +159,17 @@ func LoadConfig(env Env) (config *Config, err error) {
 	}
 
 	if config.WarnTimeout == 0 {
-		timeout, err := time.ParseDuration(env.Fetch("DIRENV_WARN_TIMEOUT", "5s"))
+		timeout, err := time.ParseDuration(env.Fetch("powerenv_WARN_TIMEOUT", "5s"))
 		if err != nil {
-			logError("invalid DIRENV_WARN_TIMEOUT: " + err.Error())
+			logError("invalid powerenv_WARN_TIMEOUT: " + err.Error())
 			timeout = 5 * time.Second
 		}
 		config.WarnTimeout = timeout
 	}
 
 	if config.BashPath == "" {
-		if env[DIRENV_BASH] != "" {
-			config.BashPath = env[DIRENV_BASH]
+		if env[powerenv_BASH] != "" {
+			config.BashPath = env[powerenv_BASH]
 		} else if bashPath != "" {
 			config.BashPath = bashPath
 		} else if config.BashPath, err = exec.LookPath("bash"); err != nil {
@@ -179,18 +179,18 @@ func LoadConfig(env Env) (config *Config, err error) {
 	}
 
 	if config.CacheDir == "" {
-		config.CacheDir = xdg.CacheDir(env, "direnv")
+		config.CacheDir = xdg.CacheDir(env, "powerenv")
 	}
 	if config.CacheDir == "" {
-		err = fmt.Errorf("couldn't find a cache directory for direnv")
+		err = fmt.Errorf("couldn't find a cache directory for powerenv")
 		return
 	}
 
 	if config.DataDir == "" {
-		config.DataDir = xdg.DataDir(env, "direnv")
+		config.DataDir = xdg.DataDir(env, "powerenv")
 	}
 	if config.DataDir == "" {
-		err = fmt.Errorf("couldn't find a data directory for direnv")
+		err = fmt.Errorf("couldn't find a data directory for powerenv")
 		return
 	}
 
@@ -210,7 +210,7 @@ func (config *Config) LoadedRC() *RC {
 	}
 	rcPath := config.RCFile
 
-	timesString := config.Env[DIRENV_WATCHES]
+	timesString := config.Env[powerenv_WATCHES]
 
 	return RCFromEnv(rcPath, timesString, config)
 }
@@ -232,10 +232,10 @@ func (config *Config) FindRC() (*RC, error) {
 // Revert undoes the recorded changes (if any) to the supplied environment,
 // returning a new environment
 func (config *Config) Revert(env Env) (Env, error) {
-	if config.Env[DIRENV_DIFF] == "" {
+	if config.Env[powerenv_DIFF] == "" {
 		return env.Copy(), nil
 	}
-	diff, err := LoadEnvDiff(config.Env[DIRENV_DIFF])
+	diff, err := LoadEnvDiff(config.Env[powerenv_DIFF])
 	if err == nil {
 		return diff.Reverse().Patch(env), nil
 	}

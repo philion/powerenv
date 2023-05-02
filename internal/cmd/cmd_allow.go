@@ -6,10 +6,10 @@ import (
 	"path/filepath"
 )
 
-// CmdAllow is `direnv allow [PATH_TO_RC]`
+// CmdAllow is `powerenv allow [PATH_TO_RC]`
 var CmdAllow = &Cmd{
 	Name:    "allow",
-	Desc:    "Grants direnv permission to load the given .envrc or .env file.",
+	Desc:    "Grants powerenv permission to load the given .envrc or .env file.",
 	Args:    []string{"[PATH_TO_RC]"},
 	Aliases: []string{"permit", "grant"},
 	Action:  actionWithConfig(cmdAllowAction),

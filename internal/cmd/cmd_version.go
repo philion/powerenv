@@ -7,10 +7,10 @@ import (
 	"golang.org/x/mod/semver"
 )
 
-// CmdVersion is `direnv version`
+// CmdVersion is `powerenv version`
 var CmdVersion = &Cmd{
 	Name:    "version",
-	Desc:    "prints the version or checks that direnv is older than VERSION_AT_LEAST.",
+	Desc:    "prints the version or checks that powerenv is older than VERSION_AT_LEAST.",
 	Args:    []string{"[VERSION_AT_LEAST]"},
 	Aliases: []string{"--version"},
 	Action: actionSimple(func(env Env, args []string) error {

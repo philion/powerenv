@@ -7,7 +7,7 @@ import (
 // Shell is the interface that represents the interaction with the host shell.
 type Shell interface {
 	// Hook is the string that gets evaluated into the host shell config and
-	// setups direnv as a prompt hook.
+	// setups powerenv as a prompt hook.
 	Hook() (string, error)
 
 	// Export outputs the ShellExport as an evaluatable string on the host shell

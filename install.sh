@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 #
-# A good old bash | curl script for direnv.
+# A good old bash | curl script for powerenv.
 #
 set -euo pipefail
 
@@ -21,7 +21,7 @@ set -euo pipefail
       log "the script failed with error $ret.\n" \
         "\n" \
         "To report installation errors, submit an issue to\n" \
-        "    https://github.com/direnv/direnv/issues/new/choose"
+        "    https://github.com/powerenv/powerenv/issues/new/choose"
     fi
     exit "$ret"
   }
@@ -45,7 +45,7 @@ set -euo pipefail
       ;;
     *)
       die "Machine $(uname -m) not supported by the installer.\n" \
-        "Go to https://direnv for alternate installation methods."
+        "Go to https://powerenv for alternate installation methods."
       ;;
   esac
   log "kernel=$kernel machine=$machine"
@@ -78,31 +78,31 @@ set -euo pipefail
 
   log "looking for a download URL"
   download_url=$(
-    curl -fL "https://api.github.com/repos/direnv/direnv/releases/$release" \
+    curl -fL "https://api.github.com/repos/powerenv/powerenv/releases/$release" \
     | grep browser_download_url \
     | cut -d '"' -f 4 \
-    | grep "direnv.$kernel.$machine"
+    | grep "powerenv.$kernel.$machine"
   )
   echo "download_url=$download_url"
 
   log "downloading"
-  curl -o "$bin_path/direnv" -fL "$download_url"
-  chmod a+x "$bin_path/direnv"
+  curl -o "$bin_path/powerenv" -fL "$download_url"
+  chmod a+x "$bin_path/powerenv"
 
   cat <<DONE
 
-The direnv binary is now available in:
+The powerenv binary is now available in:
 
-    $bin_path/direnv
+    $bin_path/powerenv
 
 The last step is to configure your shell to use it. For example for bash, add
 the following lines at the end of your ~/.bashrc:
 
-    eval "\$(direnv hook bash)"
+    eval "\$(powerenv hook bash)"
 
 Then restart the shell.
 
-For other shells, see https://direnv.net/docs/hook.html
+For other shells, see https://powerenv.net/docs/hook.html
 
 Thanks!
 DONE

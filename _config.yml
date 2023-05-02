@@ -1,7 +1,7 @@
 theme: jekyll-theme-primer
-title: direnv
+title: powerenv
 description: "unclutter your .profile"
-url: "https://direnv.net"
+url: "https://powerenv.net"
 
 exclude:
   - test

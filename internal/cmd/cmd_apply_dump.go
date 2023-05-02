@@ -5,10 +5,10 @@ import (
 	"os"
 )
 
-// CmdApplyDump is `direnv apply_dump FILE`
+// CmdApplyDump is `powerenv apply_dump FILE`
 var CmdApplyDump = &Cmd{
 	Name:    "apply_dump",
-	Desc:    "Accepts a filename containing `direnv dump` output and generates a series of bash export statements to apply the given env",
+	Desc:    "Accepts a filename containing `powerenv dump` output and generates a series of bash export statements to apply the given env",
 	Args:    []string{"FILE"},
 	Private: true,
 	Action:  actionSimple(cmdApplyDumpAction),

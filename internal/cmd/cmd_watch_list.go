@@ -10,7 +10,7 @@ import (
 	"strings"
 )
 
-// CmdWatchList is `direnv watch-list`
+// CmdWatchList is `powerenv watch-list`
 var CmdWatchList = &Cmd{
 	Name:    "watch-list",
 	Desc:    "Pipe pairs of `mtime path` to stdin to build a list of files to watch.",
@@ -35,7 +35,7 @@ func watchListCommand(env Env, args []string) (err error) {
 	}
 
 	watches := NewFileTimes()
-	watchString, ok := env[DIRENV_WATCHES]
+	watchString, ok := env[powerenv_WATCHES]
 	if ok {
 		err = watches.Unmarshal(watchString)
 		if err != nil {
@@ -74,7 +74,7 @@ func watchListCommand(env Env, args []string) (err error) {
 	}
 
 	e := make(ShellExport)
-	e.Add(DIRENV_WATCHES, watches.Marshal())
+	e.Add(powerenv_WATCHES, watches.Marshal())
 
 	os.Stdout.WriteString(shell.Export(e))
 

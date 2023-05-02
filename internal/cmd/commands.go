@@ -30,7 +30,7 @@ type action interface {
 	Call(env Env, args []string, config *Config) error
 }
 
-// Cmd represents a direnv sub-command
+// Cmd represents a powerenv sub-command
 type Cmd struct {
 	Name    string
 	Desc    string
@@ -40,7 +40,7 @@ type Cmd struct {
 	Action  action
 }
 
-// CmdList contains the list of all direnv sub-commands
+// CmdList contains the list of all powerenv sub-commands
 var CmdList []*Cmd
 
 func init() {

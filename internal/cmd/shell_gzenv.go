@@ -3,7 +3,7 @@ package cmd
 import (
 	"errors"
 
-	"github.com/direnv/direnv/v2/gzenv"
+	"github.com/powerenv/powerenv/v2/gzenv"
 )
 
 type gzenvShell int

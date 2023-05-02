@@ -7,9 +7,9 @@ import (
 )
 
 const (
-	defaultLogFormat        = "direnv: %s"
+	defaultLogFormat        = "powerenv: %s"
 	errorLogFormat          = defaultLogFormat
-	errorLogFormatWithColor = "\033[31mdirenv: %s\033[0m"
+	errorLogFormatWithColor = "\033[31mpowerenv: %s\033[0m"
 )
 
 var debugging bool
@@ -18,10 +18,10 @@ var noColor = os.Getenv("TERM") == "dumb"
 func setupLogging(env Env) {
 	log.SetFlags(0)
 	log.SetPrefix("")
-	if val, ok := env[DIRENV_DEBUG]; ok && val == "1" {
+	if val, ok := env[powerenv_DEBUG]; ok && val == "1" {
 		debugging = true
 		log.SetFlags(log.Ltime)
-		log.SetPrefix("direnv: ")
+		log.SetPrefix("powerenv: ")
 	}
 }
 
@@ -34,7 +34,7 @@ func logError(msg string, a ...interface{}) {
 }
 
 func logStatus(env Env, msg string, a ...interface{}) {
-	format, ok := env["DIRENV_LOG_FORMAT"]
+	format, ok := env["powerenv_LOG_FORMAT"]
 	if !ok {
 		format = defaultLogFormat
 	}

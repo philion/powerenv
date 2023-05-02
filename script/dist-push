@@ -16,7 +16,7 @@ fi
 # Prepare the headers for our curl-command.
 AUTH_HEADER="Authorization: token ${GITHUB_TOKEN}"
 # Set the github repository in CI
-: "${GITHUB_REPOSITORY:=direnv/direnv}"
+: "${GITHUB_REPOSITORY:=powerenv/powerenv}"
 
 # Create the correct Upload URL.
 if [[ -n "${1:-}" ]]; then

@@ -14,7 +14,7 @@ success=0
 # always execute relative to here
 cd "$(dirname "$0")" || exit 1
 
-# add the built direnv to the path
+# add the built powerenv to the path
 root=$(cd .. && pwd -P)
 export PATH=$root:$PATH
 

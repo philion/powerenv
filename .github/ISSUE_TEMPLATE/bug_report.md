@@ -19,7 +19,7 @@ A clear and concise description of what you expected to happen.
 **Environment**
  - OS: [e.g. macOS Mojave, Ubuntu 18.04, ...]
  - Shell: [e.g. bash, zsh, ...]
- - Direnv version [e.g. 2.20.0]
+ - powerenv version [e.g. 2.20.0]
 
 **Additional context**
 Add any other context about the problem here.

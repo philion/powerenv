@@ -2,14 +2,14 @@ package cmd
 
 //nolint
 const (
-	DIRENV_CONFIG = "DIRENV_CONFIG"
-	DIRENV_BASH   = "DIRENV_BASH"
-	DIRENV_DEBUG  = "DIRENV_DEBUG"
+	powerenv_CONFIG = "powerenv_CONFIG"
+	powerenv_BASH   = "powerenv_BASH"
+	powerenv_DEBUG  = "powerenv_DEBUG"
 
-	DIRENV_DIR     = "DIRENV_DIR"
-	DIRENV_FILE    = "DIRENV_FILE"
-	DIRENV_WATCHES = "DIRENV_WATCHES"
-	DIRENV_DIFF    = "DIRENV_DIFF"
+	powerenv_DIR     = "powerenv_DIR"
+	powerenv_FILE    = "powerenv_FILE"
+	powerenv_WATCHES = "powerenv_WATCHES"
+	powerenv_DIFF    = "powerenv_DIFF"
 
-	DIRENV_DUMP_FILE_PATH = "DIRENV_DUMP_FILE_PATH"
+	powerenv_DUMP_FILE_PATH = "powerenv_DUMP_FILE_PATH"
 )

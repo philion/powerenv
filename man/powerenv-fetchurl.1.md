@@ -1,15 +1,15 @@
-DIRENV-FETCHURL 1 "2019" direnv "User Manuals"
+powerenv-FETCHURL 1 "2019" powerenv "User Manuals"
 ==============================================
 
 NAME
 ----
 
-direnv fetchurl - Fetch a URL to disk
+powerenv fetchurl - Fetch a URL to disk
 
 SYNOPSIS
 --------
 
-*direnv fetchurl* <url> [<integrity-hash>]
+*powerenv fetchurl* <url> [<integrity-hash>]
 
 DESCRIPTION
 -----------
@@ -48,7 +48,7 @@ OPTIONS
 OUTPUT
 ------
 
-*direnv fetchurl* outputs different content based on the argument.
+*powerenv fetchurl* outputs different content based on the argument.
 
 If the `integrity-hash` is being passed, it will output the path to the
 on-disk location, if the retrieval was successful.
@@ -60,20 +60,20 @@ displayed.
 EXAMPLE
 -------
 
-    $ ./direnv fetchurl https://releases.nixos.org/nix/nix-2.3.7/install
+    $ ./powerenv fetchurl https://releases.nixos.org/nix/nix-2.3.7/install
     Found hash: sha256-7Gxl5GzI9juc/U30Igh/pY+p6+gj5Waohfwql3jHIds=
 
     Invoke fetchurl again with the hash as an argument to get the disk location:
 
-      direnv fetchurl "https://releases.nixos.org/nix/nix-2.3.7/install" "sha256-7Gxl5GzI9juc/U30Igh/pY+p6+gj5Waohfwql3jHIds="
-      #=> /home/zimbatm/.cache/direnv/cas/sha256-7Gxl5GzI9juc_U30Igh_pY+p6+gj5Waohfwql3jHIds=
+      powerenv fetchurl "https://releases.nixos.org/nix/nix-2.3.7/install" "sha256-7Gxl5GzI9juc/U30Igh/pY+p6+gj5Waohfwql3jHIds="
+      #=> /home/zimbatm/.cache/powerenv/cas/sha256-7Gxl5GzI9juc_U30Igh_pY+p6+gj5Waohfwql3jHIds=
 
 ENVIRONMENT VARIABLES
 ---------------------
 
 **XDG_CACHE_HOME**
     This variable is used to select the on-disk location of the fetched URLs
-    as `$XDG_CACHE_HOME/direnv/cas`. If **XDG_CACHE_HOME** is unset or empty,
+    as `$XDG_CACHE_HOME/powerenv/cas`. If **XDG_CACHE_HOME** is unset or empty,
     defaults to `$HOME/.cache`.
 
 COPYRIGHT
@@ -84,4 +84,4 @@ MIT licence - Copyright (C) 2019 @zimbatm and contributors
 SEE ALSO
 --------
 
-direnv-stdlib(1)
+powerenv-stdlib(1)

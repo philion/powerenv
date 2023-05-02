@@ -1,19 +1,19 @@
 .nh
-.TH DIRENV.TOML 1 "2019" direnv "User Manuals"
+.TH powerenv.TOML 1 "2019" powerenv "User Manuals"
 .SH NAME
 .PP
-direnv.toml - the direnv configuration file
+powerenv.toml - the powerenv configuration file
 
 .SH DESCRIPTION
 .PP
 A configuration file in TOML
-\[la]https://github.com/toml-lang/toml\[ra] format to specify a variety of configuration options for direnv. The file is read from \fB\fC$XDG_CONFIG_HOME/direnv/direnv.toml\fR\&.
+\[la]https://github.com/toml-lang/toml\[ra] format to specify a variety of configuration options for powerenv. The file is read from \fB\fC$XDG_CONFIG_HOME/powerenv/powerenv.toml\fR\&.
 
 .PP
 .RS
 
 .PP
-For versions v2.21.0 and below use config.toml instead of direnv.toml
+For versions v2.21.0 and below use config.toml instead of powerenv.toml
 
 .RE
 
@@ -46,7 +46,7 @@ The following sections are supported:
 .SH [global]
 .SS \fB\fCbash_path\fR
 .PP
-This allows one to hard-code the position of bash. It maybe be useful to set this to avoid having direnv to fail when PATH is being mutated.
+This allows one to hard-code the position of bash. It maybe be useful to set this to avoid having powerenv to fail when PATH is being mutated.
 
 .SS \fB\fCdisable_stdin\fR
 .PP
@@ -73,14 +73,14 @@ Valid time units are "ns", "us" (or "µs"), "ms", "s", "m", "h".
 
 .SH [whitelist]
 .PP
-Specifying whitelist directives marks specific directory hierarchies or specific directories as "trusted" -- direnv will evaluate any matching .envrc files regardless of whether they have been specifically allowed. \fBThis feature should be used with great care\fP, as anyone with the ability to write files to that directory (including collaborators on VCS repositories) will be able to execute arbitrary code on your computer.
+Specifying whitelist directives marks specific directory hierarchies or specific directories as "trusted" -- powerenv will evaluate any matching .envrc files regardless of whether they have been specifically allowed. \fBThis feature should be used with great care\fP, as anyone with the ability to write files to that directory (including collaborators on VCS repositories) will be able to execute arbitrary code on your computer.
 
 .PP
 There are two types of whitelist directives supported:
 
 .SS \fB\fCprefix\fR
 .PP
-Accepts an array of strings. If any of the strings in this list are a prefix of an .envrc file's absolute path, that file will be implicitly allowed, regardless of contents or past usage of \fB\fCdirenv allow\fR or \fB\fCdirenv deny\fR\&.
+Accepts an array of strings. If any of the strings in this list are a prefix of an .envrc file's absolute path, that file will be implicitly allowed, regardless of contents or past usage of \fB\fCpowerenv allow\fR or \fB\fCpowerenv deny\fR\&.
 
 .PP
 Example:
@@ -109,7 +109,7 @@ and so on
 .RE
 
 .PP
-In this example, the following .envrc files will not be implicitly allowed (although they can be explicitly allowed by running \fB\fCdirenv allow\fR):
+In this example, the following .envrc files will not be implicitly allowed (although they can be explicitly allowed by running \fB\fCpowerenv allow\fR):
 
 .RS
 .IP \(bu 2
@@ -121,7 +121,7 @@ In this example, the following .envrc files will not be implicitly allowed (alth
 
 .SS \fB\fCexact\fR
 .PP
-Accepts an array of strings. Each string can be a directory name or the full path to an .envrc file. If a directory name is passed, it will be treated as if it had been passed as itself with \fB\fC/.envrc\fR appended. After resolving the filename, each string will be checked for being an exact match with an .envrc file's absolute path. If they match exactly, that .envrc file will be implicitly allowed, regardless of contents or past usage of \fB\fCdirenv allow\fR or \fB\fCdirenv deny\fR\&.
+Accepts an array of strings. Each string can be a directory name or the full path to an .envrc file. If a directory name is passed, it will be treated as if it had been passed as itself with \fB\fC/.envrc\fR appended. After resolving the filename, each string will be checked for being an exact match with an .envrc file's absolute path. If they match exactly, that .envrc file will be implicitly allowed, regardless of contents or past usage of \fB\fCpowerenv allow\fR or \fB\fCpowerenv deny\fR\&.
 
 .PP
 Example:
@@ -148,7 +148,7 @@ In this example, the following .envrc files will be implicitly allowed, and no o
 .RE
 
 .PP
-In this example, the following .envrc files will not be implicitly allowed (although they can be explicitly allowed by running \fB\fCdirenv allow\fR):
+In this example, the following .envrc files will not be implicitly allowed (although they can be explicitly allowed by running \fB\fCpowerenv allow\fR):
 
 .RS
 .IP \(bu 2
@@ -164,4 +164,4 @@ MIT licence - Copyright (C) 2019 @zimbatm and contributors
 
 .SH SEE ALSO
 .PP
-direnv(1), direnv-stdlib(1)
+powerenv(1), powerenv-stdlib(1)

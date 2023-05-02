@@ -8,15 +8,15 @@ type bash struct{}
 var Bash Shell = bash{}
 
 const bashHook = `
-_direnv_hook() {
+_powerenv_hook() {
   local previous_exit_status=$?;
   trap -- '' SIGINT;
   eval "$("{{.SelfPath}}" export bash)";
   trap - SIGINT;
   return $previous_exit_status;
 };
-if ! [[ "${PROMPT_COMMAND:-}" =~ _direnv_hook ]]; then
-  PROMPT_COMMAND="_direnv_hook${PROMPT_COMMAND:+;$PROMPT_COMMAND}"
+if ! [[ "${PROMPT_COMMAND:-}" =~ _powerenv_hook ]]; then
+  PROMPT_COMMAND="_powerenv_hook${PROMPT_COMMAND:+;$PROMPT_COMMAND}"
 fi
 `
 

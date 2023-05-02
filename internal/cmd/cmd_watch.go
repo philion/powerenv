@@ -5,10 +5,10 @@ import (
 	"os"
 )
 
-// CmdWatch is `direnv watch SHELL [PATH...]`
+// CmdWatch is `powerenv watch SHELL [PATH...]`
 var CmdWatch = &Cmd{
 	Name:    "watch",
-	Desc:    "Adds a path to the list that direnv watches for changes",
+	Desc:    "Adds a path to the list that powerenv watches for changes",
 	Args:    []string{"SHELL", "PATH..."},
 	Private: true,
 	Action:  actionSimple(cmdWatchAction),
@@ -33,7 +33,7 @@ func cmdWatchAction(env Env, args []string) (err error) {
 	}
 
 	watches := NewFileTimes()
-	watchString, ok := env[DIRENV_WATCHES]
+	watchString, ok := env[powerenv_WATCHES]
 	if ok {
 		err = watches.Unmarshal(watchString)
 		if err != nil {
@@ -49,7 +49,7 @@ func cmdWatchAction(env Env, args []string) (err error) {
 	}
 
 	e := make(ShellExport)
-	e.Add(DIRENV_WATCHES, watches.Marshal())
+	e.Add(powerenv_WATCHES, watches.Marshal())
 
 	os.Stdout.WriteString(shell.Export(e))
 

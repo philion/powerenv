@@ -4,10 +4,10 @@ import (
 	"fmt"
 	"os"
 
-	"github.com/direnv/direnv/v2/pkg/dotenv"
+	"github.com/powerenv/powerenv/v2/pkg/dotenv"
 )
 
-// CmdDotEnv is `direnv dotenv [SHELL [PATH_TO_DOTENV]]`
+// CmdDotEnv is `powerenv dotenv [SHELL [PATH_TO_DOTENV]]`
 // Transforms a .env file to evaluatable `export KEY=PAIR` statements.
 //
 // See: https://github.com/bkeepers/dotenv and https://github.com/ddollar/foreman

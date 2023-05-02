@@ -6,11 +6,11 @@ Setup a go environment https://golang.org/doc/install
 
 Clone the project:
 
-    $ git clone git@github.com:direnv/direnv.git
+    $ git clone git@github.com:powerenv/powerenv.git
 
 Build by just typing make:
 
-    $ cd direnv
+    $ cd powerenv
     $ make
 
 Test the projects:

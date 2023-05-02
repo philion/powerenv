@@ -9,20 +9,20 @@ E:PATH = (path:dir $E:TEST_DIR):$E:PATH
 
 cd $E:TEST_DIR
 
-## reset the direnv loading if any
-set-env DIRENV_CONFIG $pwd
-unset-env DIRENV_BASH
-unset-env DIRENV_DIR
-unset-env DIRENV_FILE
-unset-env DIRENV_WATCHES
-unset-env DIRENV_DIFF
+## reset the powerenv loading if any
+set-env powerenv_CONFIG $pwd
+unset-env powerenv_BASH
+unset-env powerenv_DIR
+unset-env powerenv_FILE
+unset-env powerenv_WATCHES
+unset-env powerenv_DIFF
 
-mkdir -p $E:XDG_CONFIG_HOME/direnv
-touch $E:XDG_CONFIG_HOME/direnv/direnvrc
+mkdir -p $E:XDG_CONFIG_HOME/powerenv
+touch $E:XDG_CONFIG_HOME/powerenv/powerenvrc
 
-fn direnv-eval {
+fn powerenv-eval {
 	try {
-		m = (direnv export elvish | from-json)
+		m = (powerenv export elvish | from-json)
 		keys $m | each [k]{
 			if $m[$k] {
 				set-env $k $m[$k]
@@ -36,7 +36,7 @@ fn direnv-eval {
 }
 
 fn test-debug {
-	if (==s $E:DIRENV_DEBUG "1") {
+	if (==s $E:powerenv_DEBUG "1") {
 		echo
 	}
 }
@@ -55,7 +55,7 @@ fn test-neq [a b]{
 
 fn test-scenario [name fct]{
 	cd $E:TEST_DIR/scenarios/$name
-	direnv allow
+	powerenv allow
 	test-debug
 	echo "\n## Testing "$name" ##"
 	test-debug
@@ -63,68 +63,68 @@ fn test-scenario [name fct]{
 	$fct
 
 	cd $E:TEST_DIR
-	direnv-eval
+	powerenv-eval
 }
 
 
 ### RUN ###
 
 try {
-	direnv allow
+	powerenv allow
 } except e {
 	nop
 }
 
-direnv-eval
+powerenv-eval
 
 test-scenario base {
 	echo "Setting up"
-	direnv-eval
+	powerenv-eval
 	test-eq $E:HELLO "world"
 
-	set E:WATCHES = $E:DIRENV_WATCHES
+	set E:WATCHES = $E:powerenv_WATCHES
 
 	echo "Reloading (should be no-op)"
-	direnv-eval
-	test-eq $E:WATCHES $E:DIRENV_WATCHES
+	powerenv-eval
+	test-eq $E:WATCHES $E:powerenv_WATCHES
 
 	sleep 1
 
 	echo "Updating envrc and reloading (should reload)"
 	touch .envrc
-	direnv-eval
-	test-neq $E:WATCHES $E:DIRENV_WATCHES
+	powerenv-eval
+	test-neq $E:WATCHES $E:powerenv_WATCHES
 
 	echo "Leaving dir (should clear env set by dir's envrc)"
 	cd ..
-	direnv-eval
+	powerenv-eval
 	test-eq $E:HELLO ""
 }
 
 test-scenario inherit {
 	cp ../base/.envrc ../inherited/.envrc
-	direnv-eval
+	powerenv-eval
 	echo "HELLO should be world:"$E:HELLO
 	test-eq $E:HELLO "world"
 
 	sleep 1
 	echo "export HELLO=goodbye" > ../inherited/.envrc
-	direnv-eval
+	powerenv-eval
 	test-eq $E:HELLO "goodbye"
 }
 
 test-scenario "ruby-layout" {
-	direnv-eval
+	powerenv-eval
 	test-neq $E:GEM_HOME ""
 }
 
 test-scenario "space dir" {
-	direnv-eval
+	powerenv-eval
 	test-eq $E:SPACE_DIR "true"
 }
 
 test-scenario "child-env" {
-	direnv-eval
+	powerenv-eval
 	test-eq $E:PARENT_PRE "1"
 	test-eq $E:CHILD "1"
 	test-eq $E:PARENT_POST "1"
@@ -132,7 +132,7 @@ test-scenario "child-env" {
 }
 
 test-scenario "utf-8" {
-	direnv-eval
+	powerenv-eval
 	test-eq $E:UTFSTUFF "♀♂"
 }
 
@@ -142,5 +142,5 @@ test-scenario "utf-8" {
 ## TODO: empty-var-unset
 
 test-scenario "missing-file-source-env" {
-	direnv-eval
+	powerenv-eval
 }

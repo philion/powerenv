@@ -4,7 +4,7 @@ import (
 	"fmt"
 )
 
-// CmdStdlib is `direnv stdlib`
+// CmdStdlib is `powerenv stdlib`
 var CmdStdlib = &Cmd{
 	Name: "stdlib",
 	Desc: "Displays the stdlib available in the .envrc execution context",

@@ -4,7 +4,7 @@ set -euo pipefail
 # always execute relative to here
 cd "$(dirname "$0")"
 
-# add the built direnv to the path
+# add the built powerenv to the path
 root=$(cd .. && pwd -P)
 export PATH=$root:$PATH
 
@@ -74,15 +74,15 @@ test_name source_up
   source_up
 )
 
-test_name direnv_apply_dump
+test_name powerenv_apply_dump
 (
   tmpfile=$(mktemp)
   cleanup() { rm "$tmpfile"; }
   trap cleanup EXIT
 
   load_stdlib
-  FOO=bar direnv dump > "$tmpfile"
-  direnv_apply_dump "$tmpfile"
+  FOO=bar powerenv dump > "$tmpfile"
+  powerenv_apply_dump "$tmpfile"
   assert_eq "$FOO" bar
 )
 
@@ -153,7 +153,7 @@ test_name use_julia
     echo "#!/usr/bin/env bash
     echo \"test-julia $version\"" > "$julia"
     chmod +x "$julia"
-    # Locally disable set -u (see https://github.com/direnv/direnv/pull/667)
+    # Locally disable set -u (see https://github.com/powerenv/powerenv/pull/667)
     if ! [[ "$(set +u; use julia "$version" 2>&1)" =~ Successfully\ loaded\ test-julia\ $version ]]; then
       return 1
     fi

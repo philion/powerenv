@@ -11,7 +11,7 @@ type elvish struct{}
 var Elvish Shell = elvish{}
 
 func (elvish) Hook() (string, error) {
-	return `## hook for direnv
+	return `## hook for powerenv
 set @edit:before-readline = $@edit:before-readline {
 	try {
 		var m = [("{{.SelfPath}}" export elvish | from-json)]

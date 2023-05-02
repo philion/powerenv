@@ -6,7 +6,7 @@ import (
 	"path/filepath"
 )
 
-// CmdDeny is `direnv deny [PATH_TO_RC]`
+// CmdDeny is `powerenv deny [PATH_TO_RC]`
 var CmdDeny = &Cmd{
 	Name:    "block",
 	Desc:    "Revokes the authorization of a given .envrc or .env file.",

@@ -1,6 +1,6 @@
-# Manage your rubies with direnv and ruby-install
+# Manage your rubies with powerenv and ruby-install
 
-direnv is just a shell extension that manages your environment variables
+powerenv is just a shell extension that manages your environment variables
 depending on the folder you live in. In this article we will explore how it
 can be used in combination with
 [ruby-install](https://github.com/postmodern/ruby-install) to manage and
@@ -8,11 +8,11 @@ select the version of ruby that you want to use in a project.
 
 ## The setup
 
-First install direnv. This is the quick version on OSX + Bash:
+First install powerenv. This is the quick version on OSX + Bash:
 
 ```bash
-brew install direnv
-echo 'eval $(direnv hook bash)' >> .bashrc
+brew install powerenv
+echo 'eval $(powerenv hook bash)' >> .bashrc
 exec $0
 ```
 
@@ -36,10 +36,10 @@ a descriptive syntax like `use ruby 1.9.3` to selects the right ruby version
 for the project.
 
 For that regard we are going to use a couple of commands available in the
-[direnv stdlib](/man/direnv-stdlib.1.md) and expand it a bit in the `~/.config/direnv/direnvrc`
+[powerenv stdlib](/man/powerenv-stdlib.1.md) and expand it a bit in the `~/.config/powerenv/powerenvrc`
 file.
 
-Add this to the `~/.config/direnv/direnvrc` file (you have to create it if it doesn't exist):
+Add this to the `~/.config/powerenv/powerenvrc` file (you have to create it if it doesn't exist):
 
 ```bash
 # Usage: use ruby <version>
@@ -53,14 +53,14 @@ use_ruby() {
 }
 ```
 
-That's it. Now in any project you can run `direnv edit .` and add
-`use ruby 1.9.3` or `use ruby 2.0` in the file like you want and direnv will
+That's it. Now in any project you can run `powerenv edit .` and add
+`use ruby 1.9.3` or `use ruby 2.0` in the file like you want and powerenv will
 select the right ruby version when you enter the project's folder.
 
 ## A bit of explanation
 
 The last part probably needs a bit more explanation. We make use of a couple
-of commands that are part of the [stdlib](/man/direnv-stdlib.1.md) which is available in
+of commands that are part of the [stdlib](/man/powerenv-stdlib.1.md) which is available in
 the execution context of an envrc.
 
 `use` is a command dispatch that's just there to build the
@@ -73,10 +73,10 @@ the execution context of an envrc.
 And finally `layout ruby` who like `use` translates into the `layout_ruby`
 function call. It's used to describe common project layouts. In the stdlib, the
 ruby layout will configure rubygems (with the `GEM_HOME` environment variable)
-to install all the gems into the .direnv/ruby/RUBY_VERSION folder under the
+to install all the gems into the .powerenv/ruby/RUBY_VERSION folder under the
 project root. This is a bit similar to rvm's gemsets except that they live
 inside your project's folder. It also configures bundler to install wrapper
-shims into the .direnv/bin folder which allows you to invoke the commands
+shims into the .powerenv/bin folder which allows you to invoke the commands
 directly instead of prefixing your ruby programs with `bundle exec` all the
 time.
 
@@ -84,7 +84,7 @@ time.
 
 As you see this approach is not restricted to ruby. You could have various
 versions of python installed under ~/.pythons and a `use_python` defined in
-your ~/.direnvrc. Or perl, php, ...  This is the good thing about direnv, it's
+your ~/.powerenvrc. Or perl, php, ...  This is the good thing about powerenv, it's
 not restricted to a single language.
 
 Actually, wouldn't it be great to have all your project's dependencies

@@ -6,7 +6,7 @@ import (
 	"strconv"
 )
 
-// CmdDump is `direnv dump`
+// CmdDump is `powerenv dump`
 var CmdDump = &Cmd{
 	Name:    "dump",
 	Desc:    "Used to export the inner bash state at the end of execution",
@@ -27,7 +27,7 @@ func cmdDumpAction(env Env, args []string) (err error) {
 	if len(args) > 2 {
 		filePath = args[2]
 	} else {
-		filePath = os.Getenv(DIRENV_DUMP_FILE_PATH)
+		filePath = os.Getenv(powerenv_DUMP_FILE_PATH)
 	}
 
 	if filePath != "" {

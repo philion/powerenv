@@ -5,13 +5,13 @@ import (
 	"path/filepath"
 )
 
-// CmdStatus is `direnv status`
+// CmdStatus is `powerenv status`
 var CmdStatus = &Cmd{
 	Name: "status",
 	Desc: "prints some debug status information",
 	Action: actionWithConfig(func(env Env, args []string, config *Config) error {
-		fmt.Println("direnv exec path", config.SelfPath)
-		fmt.Println("DIRENV_CONFIG", config.ConfDir)
+		fmt.Println("powerenv exec path", config.SelfPath)
+		fmt.Println("powerenv_CONFIG", config.ConfDir)
 
 		fmt.Println("bash_path", config.BashPath)
 		fmt.Println("disable_stdin", config.DisableStdin)

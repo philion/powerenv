@@ -7,18 +7,18 @@ type zsh struct{}
 var Zsh Shell = zsh{}
 
 const zshHook = `
-_direnv_hook() {
+_powerenv_hook() {
   trap -- '' SIGINT;
   eval "$("{{.SelfPath}}" export zsh)";
   trap - SIGINT;
 }
 typeset -ag precmd_functions;
-if [[ -z "${precmd_functions[(r)_direnv_hook]+1}" ]]; then
-  precmd_functions=( _direnv_hook ${precmd_functions[@]} )
+if [[ -z "${precmd_functions[(r)_powerenv_hook]+1}" ]]; then
+  precmd_functions=( _powerenv_hook ${precmd_functions[@]} )
 fi
 typeset -ag chpwd_functions;
-if [[ -z "${chpwd_functions[(r)_direnv_hook]+1}" ]]; then
-  chpwd_functions=( _direnv_hook ${chpwd_functions[@]} )
+if [[ -z "${chpwd_functions[(r)_powerenv_hook]+1}" ]]; then
+  chpwd_functions=( _powerenv_hook ${chpwd_functions[@]} )
 fi
 `
 

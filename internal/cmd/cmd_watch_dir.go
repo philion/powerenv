@@ -6,10 +6,10 @@ import (
 	"path/filepath"
 )
 
-// CmdWatchDir is `direnv watch-dir SHELL PATH`
+// CmdWatchDir is `powerenv watch-dir SHELL PATH`
 var CmdWatchDir = &Cmd{
 	Name:    "watch-dir",
-	Desc:    "Recursively adds a directory to the list that direnv watches for changes",
+	Desc:    "Recursively adds a directory to the list that powerenv watches for changes",
 	Args:    []string{"SHELL", "DIR"},
 	Private: true,
 	Action:  actionSimple(watchDirCommand),
@@ -34,7 +34,7 @@ func watchDirCommand(env Env, args []string) (err error) {
 	}
 
 	watches := NewFileTimes()
-	watchString, ok := env[DIRENV_WATCHES]
+	watchString, ok := env[powerenv_WATCHES]
 	if ok {
 		err = watches.Unmarshal(watchString)
 		if err != nil {
@@ -53,7 +53,7 @@ func watchDirCommand(env Env, args []string) (err error) {
 	}
 
 	e := make(ShellExport)
-	e.Add(DIRENV_WATCHES, watches.Marshal())
+	e.Add(powerenv_WATCHES, watches.Marshal())
 
 	os.Stdout.WriteString(shell.Export(e))
 
